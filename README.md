@@ -220,4 +220,4 @@ For questions about MasChain integration or blockchain development:
 
 ---
 
-**Powered by MasChain Blockchain** • Built for the future of renewable energy 
+**Powered by MasChain Blockchain** • Built for the future of renewable energy
