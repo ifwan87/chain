@@ -1,0 +1,363 @@
+# PowerChain - Smart Solar Energy Trading Platform Frontend Template
+
+## Pages Required
+
+### 1. **Dashboard** (`/dashboard`)
+- **Primary Functionality**: Real-time energy overview, quick stats, and key metrics
+- **Features**:
+  - Live energy production/consumption meters
+  - Current market prices with dynamic updates
+  - Portfolio overview (energy credits, carbon tokens, governance tokens)
+  - Recent transactions and trading activity
+  - AI-powered pricing alerts and recommendations
+  - Energy storage levels and battery status
+  - Carbon credit balance and ESG metrics
+
+### 2. **Energy Marketplace** (`/marketplace`)
+- **Primary Functionality**: Live energy trading hub with real-time bidding
+- **Features**:
+  - Real-time energy buy/sell order book
+  - Dynamic pricing chart with AI predictions
+  - Filter by energy source (solar, wind, storage)
+  - Location-based energy trading (nearby producers)
+  - Automated smart contract execution
+  - Energy traceability and origin verification
+  - Virtual Power Plant (VPP) participation options
+
+### 3. **Energy Management** (`/energy`)
+- **Primary Functionality**: Monitor and manage energy production/consumption
+- **Features**:
+  - Smart meter integration dashboard
+  - Energy production analytics (solar panel performance)
+  - Consumption patterns and optimization tips
+  - Energy storage management (battery scheduling)
+  - Load shifting and demand response controls
+  - Renewable Energy Certificate (REC) tracking
+
+### 4. **Trading History** (`/trading`)
+- **Primary Functionality**: Complete trading transaction history
+- **Features**:
+  - Transaction history with blockchain verification
+  - P2P trading performance analytics
+  - Profit/loss statements and tax reporting
+  - Contract execution status
+  - Energy delivery confirmations
+  - Carbon credit trading history
+
+### 5. **Virtual Power Plant (VPP)** (`/vpp`)
+- **Primary Functionality**: Participate in collective energy trading
+- **Features**:
+  - VPP pool management and participation
+  - Grid services marketplace (flexibility trading)
+  - Load balancing and demand response
+  - Group energy storage optimization
+  - Revenue sharing from grid services
+
+### 6. **Carbon & ESG Hub** (`/carbon`)
+- **Primary Functionality**: Carbon credit management and ESG tracking
+- **Features**:
+  - Carbon credit portfolio and NFT certificates
+  - ESG compliance dashboard
+  - Environmental impact tracking
+  - Carbon offset marketplace
+  - Sustainability reporting tools
+
+### 7. **DAO Governance** (`/governance`)
+- **Primary Functionality**: Community governance and voting
+- **Features**:
+  - Proposal creation and voting interface
+  - Governance token staking
+  - Community policy decisions
+  - Rate setting and market rules
+  - Platform upgrade voting
+
+### 8. **Gamification & Rewards** (`/rewards`)
+- **Primary Functionality**: Gamified energy trading experience
+- **Features**:
+  - Leaderboards and achievements
+  - Green energy challenges and missions
+  - Badge system for milestones
+  - Social features and community sharing
+  - Referral rewards program
+
+### 9. **Analytics & Insights** (`/analytics`)
+- **Primary Functionality**: Advanced analytics and market insights
+- **Features**:
+  - Market trends and forecasting
+  - Energy price predictions
+  - Portfolio performance analytics
+  - ROI calculations and projections
+  - Market opportunity identification
+
+### 10. **Profile & Settings** (`/profile`)
+- **Primary Functionality**: User account management
+- **Features**:
+  - Wallet management (organization/user wallets)
+  - Smart contract management
+  - Device integration (smart meters, solar panels)
+  - Notification preferences
+  - Security settings and 2FA
+
+## User Roles and Permissions
+
+### 1. **Energy Producer** (Solar Panel Owners)
+- **Permissions**:
+  - Create sell orders in marketplace
+  - Monitor energy production metrics
+  - Participate in VPP programs
+  - Access carbon credit rewards
+  - View detailed production analytics
+
+### 2. **Energy Consumer** (Residential/Commercial Users)
+- **Permissions**:
+  - Create buy orders in marketplace
+  - Track energy consumption
+  - Choose renewable energy sources
+  - Participate in demand response programs
+  - Access energy efficiency insights
+
+### 3. **Trader** (Energy Arbitrageurs)
+- **Permissions**:
+  - Advanced trading interface
+  - Bulk trading capabilities
+  - Access to API for automated trading
+  - Advanced analytics and market data
+  - Portfolio management tools
+
+### 4. **DAO Member** (Governance Token Holders)
+- **Permissions**:
+  - Vote on governance proposals
+  - Create new proposals
+  - Stake governance tokens
+  - Access exclusive features
+  - Participate in community decisions
+
+### 5. **VPP Operator** (Virtual Power Plant Managers)
+- **Permissions**:
+  - Manage VPP pools
+  - Coordinate grid services
+  - Monitor aggregated resources
+  - Distribute revenue shares
+  - Access grid integration tools
+
+## Shared Components
+
+### Navigation System
+- **Approach**: Responsive sidebar navigation with top header
+- **Structure**:
+  - Collapsible sidebar for desktop
+  - Bottom navigation for mobile
+  - Contextual navigation based on user role
+  - Quick access to key features (trading, dashboard, alerts)
+
+### Header/Top Bar
+- **Common Elements**:
+  - User profile dropdown with wallet info
+  - Real-time energy price ticker
+  - Notification center with trading alerts
+  - Theme toggle (light/dark mode)
+  - Network status indicator (MasChain connection)
+  - Emergency stop button for trading
+
+### Breadcrumbs
+- **Implementation**: Hierarchical navigation for complex pages
+- **Usage**: Analytics sections, settings, VPP management
+
+## Modals/Popups
+
+### 1. **Trading Execution Modal**
+- Quick buy/sell energy orders
+- Smart contract confirmation
+- Transaction signing with wallet
+
+### 2. **Energy Device Integration Modal**
+- Smart meter setup wizard
+- Solar panel configuration
+- Battery system integration
+
+### 3. **Carbon Credit Redemption Modal**
+- NFT certificate generation
+- Carbon offset selection
+- Redemption confirmation
+
+### 4. **Governance Voting Modal**
+- Proposal details and voting interface
+- Token staking options
+- Voting weight calculation
+
+### 5. **VPP Participation Modal**
+- Pool selection and joining
+- Revenue sharing terms
+- Resource commitment settings
+
+### 6. **Alert Configuration Modal**
+- Price alert setup
+- Market notification preferences
+- Emergency alert settings
+
+## Technical Requirements
+
+### CSS Framework
+- **Primary**: Tailwind CSS for utility-first styling
+- **Component Library**: Headless UI for accessible components
+- **Icons**: Lucide React for consistent iconography
+- **Animations**: Framer Motion for smooth transitions
+
+### Component Architecture
+- **Reusability Focus**:
+  - Atomic design principles
+  - Compound components for complex UI
+  - Custom hooks for business logic
+  - Shared utility functions
+
+### URL-Based Routing
+- **Implementation**: Next.js App Router
+- **Structure**:
+  ```
+  /dashboard
+  /marketplace
+  /energy
+  /trading
+  /vpp
+  /carbon
+  /governance
+  /rewards
+  /analytics
+  /profile
+  ```
+
+### API Data Handling
+- **Custom Hooks**:
+  - `useEnergyMarket()` - Real-time market data
+  - `useEnergyProduction()` - Production metrics
+  - `useBlockchainData()` - MasChain integration
+  - `useSmartContract()` - Contract interactions
+  - `useRealTimePrice()` - Dynamic pricing
+
+### Services Architecture
+- **API Services**:
+  - `energyMarketService` - Trading operations
+  - `blockchainService` - MasChain integration
+  - `smartMeterService` - IoT device communication
+  - `carbonCreditService` - ESG tracking
+  - `governanceService` - DAO operations
+
+## Mock API Store Structure
+
+### Energy Market Data
+```json
+{
+  "energyOffers": [
+    {
+      "id": "offer_123",
+      "sellerId": "user_456",
+      "energyType": "solar",
+      "quantity": 50, // kWh
+      "price": 0.18, // per kWh
+      "location": "Kuala Lumpur",
+      "timestamp": "2025-07-17T10:00:00Z",
+      "contractAddress": "0x...",
+      "carbonCredits": 2.5,
+      "renewable": true
+    }
+  ],
+  "energyDemands": [
+    {
+      "id": "demand_789",
+      "buyerId": "user_101",
+      "quantity": 100,
+      "maxPrice": 0.20,
+      "location": "Selangor",
+      "timestamp": "2025-07-17T10:05:00Z",
+      "preferredSource": "solar"
+    }
+  ],
+  "marketPrices": {
+    "currentPrice": 0.19,
+    "priceHistory": [],
+    "priceForecasts": [],
+    "demandSupplyRatio": 0.85
+  }
+}
+```
+
+### User Energy Profile
+```json
+{
+  "userId": "user_456",
+  "walletAddress": "0x...",
+  "energyProduction": {
+    "totalProduced": 1250, // kWh this month
+    "currentOutput": 8.5, // kW
+    "solarPanels": {
+      "capacity": 10, // kW
+      "efficiency": 0.85,
+      "location": "Kuala Lumpur"
+    }
+  },
+  "energyConsumption": {
+    "totalConsumed": 800, // kWh this month
+    "currentUsage": 3.2, // kW
+    "pattern": "residential"
+  },
+  "tokens": {
+    "energyCredits": 450,
+    "governanceTokens": 100,
+    "carbonCredits": 25
+  }
+}
+```
+
+### Trading History
+```json
+{
+  "transactions": [
+    {
+      "id": "tx_001",
+      "type": "sell",
+      "quantity": 25,
+      "price": 0.18,
+      "counterparty": "user_789",
+      "timestamp": "2025-07-17T09:30:00Z",
+      "blockchainTxHash": "0x...",
+      "status": "completed",
+      "carbonCreditsEarned": 1.25
+    }
+  ]
+}
+```
+
+## Additional Considerations
+
+### Real-time Features
+- **WebSocket Integration**: Live market data and price updates
+- **Push Notifications**: Trading alerts and market opportunities
+- **Live Charts**: Real-time energy production and consumption
+
+### Mobile Optimization
+- **Progressive Web App**: Offline capability for monitoring
+- **Touch-friendly Trading**: Swipe gestures for quick actions
+- **Mobile-first Design**: Essential features prioritized
+
+### Security Features
+- **Multi-signature Wallets**: Enhanced security for large transactions
+- **Transaction Limits**: Configurable daily trading limits
+- **Audit Trails**: Complete transaction history on MasChain
+
+### Performance Optimization
+- **Data Caching**: Redis for frequently accessed market data
+- **Lazy Loading**: Code splitting for optimal load times
+- **Edge Computing**: Low-latency IoT data processing
+
+### Accessibility
+- **WCAG 2.1 AA Compliance**: Screen reader support
+- **Keyboard Navigation**: Full keyboard accessibility
+- **Color Contrast**: High contrast mode for visually impaired
+
+### Integration Requirements
+- **MasChain L1 Integration**: Smart contract deployment and execution
+- **Smart Meter APIs**: Real-time energy data collection
+- **Payment Gateways**: Fiat-to-crypto conversion
+- **ESG Reporting**: Automated sustainability reports
+
+This template provides a comprehensive foundation for building PowerChain as a cutting-edge smart solar energy trading platform leveraging MasChain's blockchain capabilities while focusing on user experience, gamification, and real-world utility.

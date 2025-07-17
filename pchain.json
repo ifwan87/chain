@@ -1,0 +1,474 @@
+{
+  "designSystem": {
+    "brand": {
+      "name": "Circle",
+      "primaryColor": "#4F46E5",
+      "secondaryColor": "#EC4899",
+      "accentColor": "#06B6D4"
+    },
+    "colorPalette": {
+      "primary": {
+        "main": "#4F46E5",
+        "light": "#6366F1",
+        "dark": "#3730A3",
+        "contrast": "#FFFFFF"
+      },
+      "secondary": {
+        "main": "#EC4899",
+        "light": "#F472B6",
+        "dark": "#BE185D",
+        "contrast": "#FFFFFF"
+      },
+      "neutral": {
+        "white": "#FFFFFF",
+        "gray50": "#F9FAFB",
+        "gray100": "#F3F4F6",
+        "gray200": "#E5E7EB",
+        "gray300": "#D1D5DB",
+        "gray400": "#9CA3AF",
+        "gray500": "#6B7280",
+        "gray600": "#4B5563",
+        "gray700": "#374151",
+        "gray800": "#1F2937",
+        "gray900": "#111827",
+        "black": "#000000"
+      },
+      "accent": {
+        "teal": "#06B6D4",
+        "emerald": "#10B981",
+        "orange": "#F59E0B",
+        "red": "#EF4444",
+        "purple": "#8B5CF6"
+      },
+      "backgrounds": {
+        "primary": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        "heroGradient": "linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #581c87 100%)",
+        "cardGradient": "linear-gradient(135deg, #fef7ff 0%, #f3e8ff 100%)",
+        "accentGradient": "linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%)"
+      }
+    },
+    "typography": {
+      "fontFamily": {
+        "primary": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        "mono": "Monaco, 'Cascadia Code', 'Roboto Mono', monospace"
+      },
+      "fontSize": {
+        "xs": "0.75rem",
+        "sm": "0.875rem",
+        "base": "1rem",
+        "lg": "1.125rem",
+        "xl": "1.25rem",
+        "2xl": "1.5rem",
+        "3xl": "1.875rem",
+        "4xl": "2.25rem",
+        "5xl": "3rem",
+        "6xl": "3.75rem"
+      },
+      "fontWeight": {
+        "normal": "400",
+        "medium": "500",
+        "semibold": "600",
+        "bold": "700"
+      },
+      "lineHeight": {
+        "tight": "1.25",
+        "snug": "1.375",
+        "normal": "1.5",
+        "relaxed": "1.625"
+      }
+    },
+    "spacing": {
+      "xs": "0.25rem",
+      "sm": "0.5rem",
+      "md": "1rem",
+      "lg": "1.5rem",
+      "xl": "2rem",
+      "2xl": "3rem",
+      "3xl": "4rem",
+      "4xl": "6rem",
+      "5xl": "8rem"
+    },
+    "borderRadius": {
+      "sm": "0.25rem",
+      "md": "0.5rem",
+      "lg": "0.75rem",
+      "xl": "1rem",
+      "2xl": "1.5rem",
+      "full": "9999px"
+    },
+    "shadows": {
+      "sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+      "md": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+      "lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+      "xl": "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+    },
+    "elementStyling": {
+      "layout": {
+        "pageBackground": {
+          "hero": "linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #581c87 100%)",
+          "content": "#FFFFFF",
+          "section": "#F9FAFB"
+        },
+        "container": {
+          "maxWidth": "1280px",
+          "padding": "0 2rem",
+          "margin": "0 auto"
+        }
+      },
+      "navigation": {
+        "background": "rgba(255, 255, 255, 0.95)",
+        "backdropFilter": "blur(10px)",
+        "borderBottom": "1px solid rgba(229, 231, 235, 0.8)",
+        "logo": {
+          "text": "#111827",
+          "fontSize": "1.5rem",
+          "fontWeight": "700"
+        },
+        "links": {
+          "text": "#4B5563",
+          "fontSize": "0.875rem",
+          "fontWeight": "500",
+          "hover": {
+            "text": "#111827"
+          }
+        }
+      },
+      "buttons": {
+        "primary": {
+          "background": "#4F46E5",
+          "text": "#FFFFFF",
+          "fontSize": "0.875rem",
+          "fontWeight": "600",
+          "padding": "0.75rem 1.5rem",
+          "borderRadius": "0.5rem",
+          "border": "none",
+          "shadow": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+          "hover": {
+            "background": "#4338CA",
+            "transform": "translateY(-1px)",
+            "shadow": "0 4px 12px rgba(79, 70, 229, 0.4)"
+          },
+          "active": {
+            "background": "#3730A3",
+            "transform": "translateY(0)"
+          }
+        },
+        "secondary": {
+          "background": "#FFFFFF",
+          "text": "#374151",
+          "fontSize": "0.875rem",
+          "fontWeight": "600",
+          "padding": "0.75rem 1.5rem",
+          "borderRadius": "0.5rem",
+          "border": "1px solid #D1D5DB",
+          "shadow": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+          "hover": {
+            "background": "#F9FAFB",
+            "border": "1px solid #9CA3AF"
+          }
+        },
+        "cta": {
+          "background": "linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)",
+          "text": "#FFFFFF",
+          "fontSize": "1rem",
+          "fontWeight": "600",
+          "padding": "1rem 2rem",
+          "borderRadius": "0.75rem",
+          "border": "none",
+          "shadow": "0 4px 12px rgba(79, 70, 229, 0.4)",
+          "hover": {
+            "background": "linear-gradient(135deg, #4338CA 0%, #6D28D9 100%)",
+            "transform": "translateY(-2px)",
+            "shadow": "0 8px 20px rgba(79, 70, 229, 0.5)"
+          }
+        }
+      },
+      "cards": {
+        "default": {
+          "background": "#FFFFFF",
+          "border": "1px solid #E5E7EB",
+          "borderRadius": "1rem",
+          "padding": "1.5rem",
+          "shadow": "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+          "hover": {
+            "shadow": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+            "transform": "translateY(-2px)"
+          }
+        },
+        "feature": {
+          "background": "linear-gradient(135deg, #fef7ff 0%, #f3e8ff 100%)",
+          "border": "1px solid #e9d5ff",
+          "borderRadius": "1.5rem",
+          "padding": "2rem",
+          "shadow": "0 4px 12px rgba(139, 92, 246, 0.1)",
+          "hover": {
+            "shadow": "0 10px 20px rgba(139, 92, 246, 0.2)"
+          }
+        },
+        "testimonial": {
+          "background": "#FFFFFF",
+          "border": "1px solid #E5E7EB",
+          "borderRadius": "1rem",
+          "padding": "1.5rem",
+          "shadow": "0 1px 3px 0 rgba(0, 0, 0, 0.1)"
+        }
+      },
+      "forms": {
+        "input": {
+          "background": "#FFFFFF",
+          "border": "1px solid #D1D5DB",
+          "borderRadius": "0.5rem",
+          "padding": "0.75rem 1rem",
+          "fontSize": "0.875rem",
+          "text": "#111827",
+          "placeholder": "#9CA3AF",
+          "focus": {
+            "border": "1px solid #4F46E5",
+            "outline": "2px solid rgba(79, 70, 229, 0.2)",
+            "outlineOffset": "2px"
+          }
+        },
+        "label": {
+          "text": "#374151",
+          "fontSize": "0.875rem",
+          "fontWeight": "500",
+          "marginBottom": "0.5rem"
+        }
+      },
+      "icons": {
+        "default": {
+          "fill": "#6B7280",
+          "stroke": "#6B7280",
+          "size": "1.25rem"
+        },
+        "primary": {
+          "fill": "#4F46E5",
+          "stroke": "#4F46E5",
+          "size": "1.25rem"
+        },
+        "accent": {
+          "fill": "#EC4899",
+          "stroke": "#EC4899",
+          "size": "1.25rem"
+        },
+        "containers": {
+          "background": "rgba(79, 70, 229, 0.1)",
+          "borderRadius": "0.5rem",
+          "padding": "0.75rem",
+          "iconColor": "#4F46E5"
+        }
+      },
+      "badges": {
+        "default": {
+          "background": "#F3F4F6",
+          "text": "#374151",
+          "fontSize": "0.75rem",
+          "fontWeight": "500",
+          "padding": "0.25rem 0.75rem",
+          "borderRadius": "9999px"
+        },
+        "primary": {
+          "background": "rgba(79, 70, 229, 0.1)",
+          "text": "#4F46E5",
+          "fontSize": "0.75rem",
+          "fontWeight": "500",
+          "padding": "0.25rem 0.75rem",
+          "borderRadius": "9999px"
+        },
+        "success": {
+          "background": "rgba(16, 185, 129, 0.1)",
+          "text": "#059669",
+          "fontSize": "0.75rem",
+          "fontWeight": "500",
+          "padding": "0.25rem 0.75rem",
+          "borderRadius": "9999px"
+        }
+      },
+      "text": {
+        "headings": {
+          "h1": {
+            "fontSize": "3rem",
+            "fontWeight": "700",
+            "lineHeight": "1.2",
+            "color": "#111827",
+            "marginBottom": "1rem"
+          },
+          "h2": {
+            "fontSize": "2.25rem",
+            "fontWeight": "700",
+            "lineHeight": "1.25",
+            "color": "#111827",
+            "marginBottom": "1rem"
+          },
+          "h3": {
+            "fontSize": "1.875rem",
+            "fontWeight": "600",
+            "lineHeight": "1.33",
+            "color": "#111827",
+            "marginBottom": "0.75rem"
+          }
+        },
+        "body": {
+          "fontSize": "1rem",
+          "lineHeight": "1.625",
+          "color": "#4B5563",
+          "marginBottom": "1rem"
+        },
+        "caption": {
+          "fontSize": "0.875rem",
+          "lineHeight": "1.43",
+          "color": "#6B7280"
+        },
+        "link": {
+          "color": "#4F46E5",
+          "textDecoration": "none",
+          "hover": {
+            "textDecoration": "underline"
+          }
+        }
+      },
+      "hero": {
+        "background": "linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #581c87 100%)",
+        "text": "#FFFFFF",
+        "title": {
+          "fontSize": "3.75rem",
+          "fontWeight": "700",
+          "lineHeight": "1.1",
+          "textAlign": "center",
+          "marginBottom": "1.5rem"
+        },
+        "subtitle": {
+          "fontSize": "1.25rem",
+          "fontWeight": "400",
+          "lineHeight": "1.6",
+          "textAlign": "center",
+          "opacity": "0.9",
+          "marginBottom": "2rem"
+        }
+      },
+      "testimonials": {
+        "quote": {
+          "fontSize": "1.125rem",
+          "fontWeight": "400",
+          "lineHeight": "1.6",
+          "color": "#374151",
+          "fontStyle": "italic",
+          "marginBottom": "1rem"
+        },
+        "author": {
+          "name": {
+            "fontSize": "0.875rem",
+            "fontWeight": "600",
+            "color": "#111827"
+          },
+          "title": {
+            "fontSize": "0.875rem",
+            "fontWeight": "400",
+            "color": "#6B7280"
+          }
+        }
+      },
+      "pricing": {
+        "card": {
+          "background": "#FFFFFF",
+          "border": "1px solid #E5E7EB",
+          "borderRadius": "1rem",
+          "padding": "2rem",
+          "shadow": "0 1px 3px 0 rgba(0, 0, 0, 0.1)"
+        },
+        "price": {
+          "fontSize": "2.25rem",
+          "fontWeight": "700",
+          "color": "#111827"
+        },
+        "period": {
+          "fontSize": "1rem",
+          "fontWeight": "400",
+          "color": "#6B7280"
+        }
+      },
+      "features": {
+        "checkmark": {
+          "background": "rgba(16, 185, 129, 0.1)",
+          "borderRadius": "50%",
+          "padding": "0.25rem",
+          "iconColor": "#059669"
+        },
+        "text": {
+          "fontSize": "1rem",
+          "fontWeight": "400",
+          "color": "#374151",
+          "lineHeight": "1.6"
+        }
+      },
+      "mobile": {
+        "breakpoints": {
+          "sm": "640px",
+          "md": "768px",
+          "lg": "1024px",
+          "xl": "1280px"
+        },
+        "navigation": {
+          "mobileMenu": {
+            "background": "#FFFFFF",
+            "shadow": "0 10px 15px -3px rgba(0, 0, 0, 0.1)"
+          }
+        },
+        "hero": {
+          "title": {
+            "fontSize": "2.5rem"
+          },
+          "subtitle": {
+            "fontSize": "1.125rem"
+          }
+        }
+      }
+    },
+    "animations": {
+      "transitions": {
+        "default": "all 0.2s ease-in-out",
+        "fast": "all 0.15s ease-in-out",
+        "slow": "all 0.3s ease-in-out"
+      },
+      "hover": {
+        "lift": "translateY(-2px)",
+        "scale": "scale(1.05)",
+        "fade": "opacity: 0.8"
+      }
+    },
+    "doNotRules": {
+      "gradients": [
+        "DO NOT apply hero background gradients to cards or buttons",
+        "DO NOT use card gradients on text elements",
+        "DO NOT apply button gradients to icon containers"
+      ],
+      "colors": [
+        "DO NOT use navigation text colors for body text",
+        "DO NOT apply button background colors to card backgrounds",
+        "DO NOT use icon fill colors for text content"
+      ],
+      "shadows": [
+        "DO NOT apply card shadows to text elements",
+        "DO NOT use button shadows on navigation elements",
+        "DO NOT apply hero shadows to form inputs"
+      ],
+      "spacing": [
+        "DO NOT use button padding for card padding",
+        "DO NOT apply hero spacing to component spacing",
+        "DO NOT use icon container padding for text padding"
+      ],
+      "typography": [
+        "DO NOT use heading font weights for body text",
+        "DO NOT apply hero font sizes to card content",
+        "DO NOT use caption colors for primary text"
+      ]
+    },
+    "implementationNotes": {
+      "colorUsage": "Always specify exact hex values and opacity levels for layered elements",
+      "gradientApplication": "Apply gradients only to specified background elements, never to text or icons",
+      "shadowContext": "Shadows should enhance depth hierarchy - cards lift above background, buttons lift above cards",
+      "responsiveDesign": "Scale typography and spacing proportionally across breakpoints",
+      "accessibility": "Maintain minimum 4.5:1 contrast ratio for text elements"
+    }
+  }
+}

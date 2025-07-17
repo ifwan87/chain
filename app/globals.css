@@ -1,0 +1,285 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Energy flow animation */
+@keyframes energy-flow {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.energy-flow {
+  animation: energy-flow 2s infinite;
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Button hover effects */
+.btn-primary {
+  @apply bg-primary-main text-white font-semibold py-3 px-6 rounded-lg shadow-primary transition-all duration-200 ease-in-out;
+}
+
+.btn-primary:hover {
+  @apply bg-primary-dark transform -translate-y-1 shadow-primary-lg;
+}
+
+.btn-secondary {
+  @apply bg-white text-neutral-gray700 font-semibold py-3 px-6 rounded-lg border border-neutral-gray200 shadow-sm transition-all duration-200 ease-in-out;
+}
+
+.btn-secondary:hover {
+  @apply bg-neutral-gray50 border-neutral-gray400;
+}
+
+.btn-cta {
+  @apply bg-gradient-cta text-white font-semibold py-4 px-8 rounded-xl shadow-primary transition-all duration-200 ease-in-out;
+}
+
+.btn-cta:hover {
+  @apply bg-gradient-cta-hover transform -translate-y-0.5 shadow-primary-lg;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white border border-neutral-gray200 rounded-xl p-6 shadow-md transition-all duration-200 ease-in-out;
+}
+
+.card:hover {
+  @apply shadow-lg transform -translate-y-0.5;
+}
+
+.card-feature {
+  @apply bg-gradient-card border border-purple-200 rounded-2xl p-8 shadow-feature transition-all duration-200 ease-in-out;
+}
+
+.card-feature:hover {
+  @apply shadow-feature-hover;
+}
+
+/* Input styles */
+.input {
+  @apply bg-white border border-neutral-gray300 rounded-lg py-3 px-4 text-sm text-neutral-gray900 placeholder-neutral-gray400 focus:border-primary-main focus:outline-none focus:ring-2 focus:ring-primary-main focus:ring-opacity-20;
+}
+
+/* Navigation backdrop */
+.nav-backdrop {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+}
+
+/* Energy meter styles */
+.energy-meter {
+  background: conic-gradient(from 0deg, #10B981 0%, #F59E0B 50%, #EF4444 100%);
+  border-radius: 50%;
+  position: relative;
+}
+
+.energy-meter::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  background: white;
+  border-radius: 50%;
+}
+
+/* Trading chart styles */
+.trading-chart {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+  border: 1px solid rgba(79, 70, 229, 0.1);
+}
+
+/* Status indicators */
+.status-online {
+  @apply bg-accent-emerald text-white text-xs font-medium px-2 py-1 rounded-full;
+}
+
+.status-offline {
+  @apply bg-neutral-gray400 text-white text-xs font-medium px-2 py-1 rounded-full;
+}
+
+.status-warning {
+  @apply bg-accent-orange text-white text-xs font-medium px-2 py-1 rounded-full;
+}
+
+/* Enhanced Animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.6s ease-out;
+}
+
+/* Chrome Grid Animations */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes grid-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.grid-box:hover {
+  animation: grid-pulse 0.3s ease-in-out;
+} 
