@@ -114,9 +114,10 @@ async function main() {
   console.log("=".repeat(50));
 
   // 7. Save deployment info to file
+  const network = await ethers.provider.getNetwork();
   const deploymentInfo = {
     network: hre.network.name,
-    chainId: (await ethers.provider.getNetwork()).chainId,
+    chainId: network.chainId.toString(), // Convert BigInt to string
     deployedAt: new Date().toISOString(),
     deployer: deployer.address,
     contracts: deployedContracts,
@@ -143,7 +144,7 @@ async function main() {
     contracts: deployedContracts,
     network: {
       name: hre.network.name,
-      chainId: (await ethers.provider.getNetwork()).chainId,
+      chainId: network.chainId.toString(), // Convert BigInt to string
       rpcUrl: hre.network.config.url
     }
   };
