@@ -1,0 +1,13 @@
+{
+  "contracts": {
+    "EnergyCredits": "",
+    "CarbonCredits": "",
+    "EnergyTrading": "",
+    "GovernanceDAO": ""
+  },
+  "network": {
+    "name": "maschain_testnet",
+    "chainId": 421613,
+    "rpcUrl": "https://blockchain-testnet.maschain.com"
+  }
+} 

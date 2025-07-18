@@ -7,7 +7,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "compile": "hardhat compile",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network maschain_testnet",
+    "deploy:mainnet": "hardhat run scripts/deploy.js --network maschain_mainnet",
+    "verify": "hardhat verify --network maschain_testnet",
+    "test:contracts": "hardhat test"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
@@ -33,10 +38,18 @@
     "typescript": "^5.3.0",
     "uuid": "^9.0.1",
     "ethers": "^6.8.1",
-    "buffer": "^6.0.3"
+    "buffer": "^6.0.3",
+    "@openzeppelin/contracts": "^5.0.0"
   },
   "devDependencies": {
     "eslint": "^8.56.0",
-    "eslint-config-next": "^14.1.0"
+    "eslint-config-next": "^14.1.0",
+    "hardhat": "^2.19.0",
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.0",
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.0",
+    "dotenv": "^16.3.1"
   }
 }

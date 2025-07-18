@@ -1,5 +1,52 @@
 'use client'
 
+import { ethers } from 'ethers'
+import contractsConfig from '../config/contracts.json'
+
+// Contract ABIs - These will be imported from compiled contracts
+const EnergyCreditsABI = [
+  "function balanceOf(address owner) view returns (uint256)",
+  "function transfer(address to, uint256 amount) returns (bool)",
+  "function transferFrom(address from, address to, uint256 amount) returns (bool)",
+  "function approve(address spender, uint256 amount) returns (bool)",
+  "function allowance(address owner, address spender) view returns (uint256)",
+  "function getEnergyBalance(address user) view returns (uint256)",
+  "function transferEnergyCredits(address to, uint256 amount, uint256 energyAmount) returns (bool)",
+  "function issueEnergyCredits(address to, uint256 energyAmount, string reason)",
+  "event Transfer(address indexed from, address indexed to, uint256 value)",
+  "event EnergyPurchased(address indexed buyer, address indexed seller, uint256 amount, uint256 energyAmount)"
+]
+
+const CarbonCreditsABI = [
+  "function balanceOf(address owner) view returns (uint256)",
+  "function transfer(address to, uint256 amount) returns (bool)",
+  "function getCarbonStats(address user) view returns (uint256, uint256, uint256, uint256)",
+  "function issueCarbonCredits(address to, uint256 energyAmount, string energyType)",
+  "event CarbonCreditsEarned(address indexed user, uint256 amount, uint256 energyAmount, string energyType)"
+]
+
+const EnergyTradingABI = [
+  "function createEnergyOffer(uint256 energyAmount, uint256 pricePerKWh, string energyType, string location, uint256 expiresInHours) returns (uint256)",
+  "function purchaseEnergy(uint256 offerId, uint256 energyAmount) returns (uint256)",
+  "function getActiveOffers(string energyType) view returns (uint256[])",
+  "function energyOffers(uint256 offerId) view returns (uint256, address, uint256, uint256, string, string, uint256, bool, uint256)",
+  "function getMarketStats() view returns (uint256, uint256, uint256)",
+  "function getMarketPrice(string energyType) view returns (uint256, uint256)",
+  "event EnergyOfferCreated(uint256 indexed offerId, address indexed seller, uint256 energyAmount, uint256 pricePerKWh, string energyType)",
+  "event EnergyPurchased(uint256 indexed offerId, address indexed buyer, address indexed seller, uint256 energyAmount, uint256 totalCost)"
+]
+
+const GovernanceDAOABI = [
+  "function balanceOf(address owner) view returns (uint256)",
+  "function createProposal(string title, string description, uint8 proposalType, address executionTarget, bytes executionData) returns (uint256)",
+  "function castVote(uint256 proposalId, uint8 voteType)",
+  "function getProposal(uint256 proposalId) view returns (uint256, address, string, string, uint256, uint256, uint256, uint256, uint256, bool, bool, uint8)",
+  "function getVotingStats() view returns (uint256, uint256, uint256, uint256)",
+  "function getVotingPower(address user) view returns (uint256)",
+  "event ProposalCreated(uint256 indexed proposalId, address indexed proposer, string title, string description)",
+  "event VoteCast(uint256 indexed proposalId, address indexed voter, bool support, uint256 weight)"
+]
+
 // MasChain Wallet Integration Service
 export interface MasChainAccount {
   address: string
@@ -287,7 +334,7 @@ class MasChainWalletService {
     } catch (error) {
       transaction.status = 'failed'
       console.error('Transaction failed:', error)
-      throw new Error(`Transaction failed: ${error.message}`)
+      throw new Error(`Transaction failed: ${error instanceof Error ? error.message : 'Unknown error'}`)
     }
   }
 
