@@ -10,7 +10,6 @@ interface WalletContextType {
   connectWallet: () => Promise<void>
   disconnectWallet: () => void
   isLoading: boolean
-  isInitializing: boolean // NEW: Track initial connection restoration
   buyEnergy: (sellerId: string, amount: number, price: number, energyAmount: number) => Promise<EnergyTransaction>
   refreshBalance: () => Promise<void>
   // Legacy user interface for backward compatibility
@@ -23,8 +22,6 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
   const [isConnected, setIsConnected] = useState(false)
   const [account, setAccount] = useState<MasChainAccount | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [isInitializing, setIsInitializing] = useState(true) // NEW: Track initialization
-  const [balanceUpdateCounter, setBalanceUpdateCounter] = useState(0)
 
   useEffect(() => {
     // Set up wallet event listeners
@@ -50,16 +47,12 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
 
   const initializeWalletConnection = async () => {
     try {
-      console.log('🔄 Initializing wallet connection...')
-      
       // Check if there's a persisted wallet connection
       const persistedConnection = localStorage.getItem('maschain_connected')
       const persistedAddress = localStorage.getItem('maschain_address')
       
       if (persistedConnection === 'true' && persistedAddress) {
-        console.log('🔄 Restoring persisted wallet connection for:', persistedAddress)
-        
-        // Restore wallet connection with current balance
+        // Restore wallet connection
         const balance = await masChainWallet.getBalance(persistedAddress)
         const restoredAccount: MasChainAccount = {
           address: persistedAddress,
@@ -73,39 +66,29 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
         
         setAccount(restoredAccount)
         setIsConnected(true)
-        
-        console.log('✅ Wallet connection restored successfully with balance:', balance)
-      } else {
-        console.log('🔄 No persisted wallet connection found')
       }
     } catch (error) {
-      console.error('❌ Failed to restore wallet connection:', error)
+      console.error('Failed to restore wallet connection:', error)
       // Clear invalid persisted data
       localStorage.removeItem('maschain_connected')
       localStorage.removeItem('maschain_address')
-    } finally {
-      setIsInitializing(false) // IMPORTANT: Mark initialization as complete
-      console.log('✅ Wallet initialization complete')
     }
   }
 
   const handleWalletConnect = (account: MasChainAccount) => {
-    console.log('💰 Wallet connected with balance:', account.balance)
     setAccount(account)
     setIsConnected(true)
-    setBalanceUpdateCounter(prev => prev + 1)
     
     // Persist wallet connection
     localStorage.setItem('maschain_connected', 'true')
     localStorage.setItem('maschain_address', account.address)
     
-    toast.success(`�� Wallet connected! Address: ${account.address.slice(0, 6)}...${account.address.slice(-4)}`)
+    toast.success(`🎉 Wallet connected! Address: ${account.address.slice(0, 6)}...${account.address.slice(-4)}`)
   }
 
   const handleWalletDisconnect = () => {
     setAccount(null)
     setIsConnected(false)
-    setBalanceUpdateCounter(0)
     
     // Clear persisted wallet connection
     localStorage.removeItem('maschain_connected')
@@ -115,41 +98,25 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
   }
 
   const handleBalanceChanged = (newBalance: MasChainAccount['balance']) => {
-    console.log('💰 Balance changed event received:', newBalance)
-    
-    // IMPROVED: Force immediate state update
-    setAccount(prevAccount => {
-      if (prevAccount) {
-        const updatedAccount = { ...prevAccount, balance: newBalance }
-        console.log('💰 Account state updated immediately:', updatedAccount)
-        return updatedAccount
-      }
-      return prevAccount
-    })
-    
-    // Force re-render
-    setBalanceUpdateCounter(prev => prev + 1)
-    
-    // ALSO: Update stored balance to ensure persistence
-    if (account?.address) {
-      const storedBalances = JSON.parse(localStorage.getItem('maschain_balances') || '{}')
-      storedBalances[account.address] = newBalance
-      localStorage.setItem('maschain_balances', JSON.stringify(storedBalances))
+    console.log('💰 Balance changed:', newBalance)
+    if (account) {
+      const updatedAccount = { ...account, balance: newBalance }
+      setAccount(updatedAccount)
+      // Force re-render by updating state
+      setIsConnected(true)
     }
   }
 
   const handleTransactionComplete = (transaction: EnergyTransaction) => {
     toast.success(`✅ Transaction confirmed! TxHash: ${transaction.blockHash?.slice(0, 8)}...`)
-    
-    // IMPROVED: Immediate balance refresh after transaction
-    setTimeout(async () => {
-      console.log('🔄 Auto-refreshing balance after transaction...')
-      await refreshBalance()
-    }, 500) // Shorter delay for faster updates
+    // Refresh balance after transaction
+    setTimeout(() => {
+      refreshBalance()
+    }, 1000)
   }
 
   const handleSellerNotification = (notification: any) => {
-    toast(`🔔 ${notification.message}`, { duration: 4000 })
+    toast(`�� ${notification.message}`, { duration: 4000 })
   }
 
   const handleSellerResponse = (response: any) => {
@@ -203,9 +170,6 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
 
       toast.success('Transaction submitted!', { id: 'energy-purchase' })
       
-      // IMPROVED: Immediate balance update after transaction
-      console.log('🔄 Updating balance immediately after transaction...')
-      
       // Notify the seller
       await masChainWallet.notifySeller(transaction)
       
@@ -223,29 +187,15 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
   const refreshBalance = async () => {
     if (account) {
       try {
-        console.log('💰 Refreshing balance for address:', account.address)
         const newBalance = await masChainWallet.getBalance(account.address)
-        console.log('💰 New balance received:', newBalance)
-        
-        setAccount(prevAccount => {
-          if (prevAccount) {
-            const updatedAccount = { ...prevAccount, balance: newBalance }
-            console.log('�� Balance refreshed successfully:', updatedAccount)
-            return updatedAccount
-          }
-          return prevAccount
-        })
-        
-        setBalanceUpdateCounter(prev => prev + 1)
-        
+        const updatedAccount = { ...account, balance: newBalance }
+        setAccount(updatedAccount)
         // Also update the masChainWallet's account
         if (masChainWallet['account']) {
           masChainWallet['account'].balance = newBalance
         }
-        
         toast.success('Balance refreshed!')
       } catch (error) {
-        console.error('Failed to refresh balance:', error)
         toast.error('Failed to refresh balance')
       }
     }
@@ -260,8 +210,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     avatar: '⚡',
     energyCredits: account.balance.EC,
     governanceTokens: account.balance.GT,
-    carbonCredits: account.balance.CC,
-    _balanceUpdateCounter: balanceUpdateCounter
+    carbonCredits: account.balance.CC
   } : null
 
   const value = {
@@ -270,10 +219,9 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     connectWallet,
     disconnectWallet,
     isLoading,
-    isInitializing, // NEW: Expose initialization state
     buyEnergy,
     refreshBalance,
-    user: legacyUser
+    user: legacyUser // For backward compatibility
   }
 
   return (

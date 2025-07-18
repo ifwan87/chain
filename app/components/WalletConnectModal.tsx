@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { useWallet } from '../providers/WalletProvider'
 import { X, Wallet, Shield, Loader2 } from 'lucide-react'
 
@@ -11,9 +12,24 @@ interface WalletConnectModalProps {
 }
 
 export default function WalletConnectModal({ isOpen, onClose }: WalletConnectModalProps) {
-  const { connectWallet, isLoading } = useWallet()
+  const { connectWallet, isLoading, isConnected, account } = useWallet()
   const [selectedWallet, setSelectedWallet] = useState<string | null>(null)
+  const [isConnecting, setIsConnecting] = useState(false)
   const router = useRouter()
+
+  // Handle redirect when wallet connects
+  useEffect(() => {
+    if (isConnected && account && isConnecting) {
+      console.log('✅ Wallet connected successfully, redirecting to dashboard...')
+      setIsConnecting(false)
+      onClose()
+      
+      // Redirect to dashboard
+      setTimeout(() => {
+        window.location.href = '/dashboard'
+      }, 200)
+    }
+  }, [isConnected, account, isConnecting, onClose])
 
   if (!isOpen) return null
 
@@ -42,27 +58,22 @@ export default function WalletConnectModal({ isOpen, onClose }: WalletConnectMod
             </defs>
             
             {/* 3D Cube Structure */}
-            {/* Top face - diamond shape */}
             <path d="M16 4 L26 10 L16 16 L6 10 Z" fill="url(#maschainGradient1)" />
-            
-            {/* Left face */}
             <path d="M6 10 L16 16 L16 28 L6 22 Z" fill="url(#maschainGradient2)" />
+            <path d="M26 10 L16 16 L16 28 L26 22 Z" fill="url(#maschainGradient3)" />
             
-            {/* Right face */}
-            <path d="M16 16 L26 10 L26 22 L16 28 Z" fill="url(#maschainGradient3)" />
-            
-            {/* Inner geometric M pattern - overlapping rectangles */}
-            <g opacity="0.9">
-              <rect x="10" y="12" width="3" height="8" fill="white" transform="skewY(-15)" />
-              <rect x="19" y="12" width="3" height="8" fill="white" transform="skewY(15)" />
-              <polygon points="13,14 16,12 19,14 19,16 16,18 13,16" fill="white" opacity="0.8" />
+            {/* Inner "M" pattern */}
+            <g fill="white" opacity="0.8">
+              <rect x="10" y="12" width="2" height="8" />
+              <rect x="20" y="12" width="2" height="8" />
+              <rect x="12" y="14" width="8" height="1.5" />
+              <rect x="14" y="16" width="4" height="1.5" />
             </g>
             
-            {/* Edge highlights for 3D effect */}
-            <path d="M16 4 L26 10 L16 16 L6 10 Z" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5"/>
-            <path d="M6 10 L6 22" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5"/>
-            <path d="M26 10 L26 22" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5"/>
-            <path d="M16 16 L16 28" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5"/>
+            {/* Edge highlights */}
+            <path d="M16 4 L26 10 L16 16 L6 10 Z" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5" />
+            <path d="M6 10 L16 16" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
+            <path d="M26 10 L16 16" stroke="rgba(0,0,0,0.2)" strokeWidth="0.5" />
           </svg>
         </div>
       ),
@@ -72,28 +83,52 @@ export default function WalletConnectModal({ isOpen, onClose }: WalletConnectMod
       id: 'metamask',
       name: 'MetaMask',
       description: 'Connect using MetaMask',
-      icon: '🦊',
+      icon: (
+        <div className="w-8 h-8 relative">
+          <Image
+            src="/mm.png"
+            alt="MetaMask"
+            width={32}
+            height={32}
+            className="rounded-lg"
+          />
+        </div>
+      ),
       recommended: false
     },
     {
       id: 'walletconnect',
       name: 'WalletConnect',
       description: 'Scan with WalletConnect',
-      icon: '📱',
+      icon: (
+        <div className="w-8 h-8 relative">
+          <Image
+            src="/WalletConnect-logo.png"
+            alt="WalletConnect"
+            width={32}
+            height={32}
+            className="rounded-lg"
+          />
+        </div>
+      ),
       recommended: false
     }
   ]
 
   const handleConnect = async (walletId: string) => {
+    console.log('🔄 Starting wallet connection for:', walletId)
     setSelectedWallet(walletId)
+    setIsConnecting(true)
+    
     try {
+      console.log('🔄 Calling connectWallet()...')
       await connectWallet()
-      onClose()
-      // Redirect to dashboard after successful connection
-      router.push('/dashboard')
+      console.log('✅ connectWallet() completed')
+      
+      // Don't handle redirect here - let useEffect handle it
     } catch (error) {
-      console.error('Connection failed:', error)
-    } finally {
+      console.error('❌ Connection failed:', error)
+      setIsConnecting(false)
       setSelectedWallet(null)
     }
   }
@@ -115,7 +150,7 @@ export default function WalletConnectModal({ isOpen, onClose }: WalletConnectMod
           <button
             onClick={onClose}
             className="text-neutral-gray400 hover:text-neutral-gray600 p-2"
-            disabled={isLoading}
+            disabled={isLoading || isConnecting}
           >
             <X className="h-5 w-5" />
           </button>
@@ -127,86 +162,87 @@ export default function WalletConnectModal({ isOpen, onClose }: WalletConnectMod
             <button
               key={wallet.id}
               onClick={() => handleConnect(wallet.id)}
-              disabled={isLoading}
-              className={`w-full p-4 rounded-xl border-2 transition-all duration-200 text-left ${
+              disabled={isLoading || isConnecting}
+              className={`w-full p-4 border rounded-xl text-left transition-all duration-200 ${
                 selectedWallet === wallet.id
                   ? 'border-primary-main bg-primary-main bg-opacity-5'
-                  : 'border-neutral-gray200 hover:border-neutral-gray300 hover:bg-neutral-gray50'
-              } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  : 'border-neutral-gray200 hover:border-primary-main hover:bg-primary-main hover:bg-opacity-5'
+              } ${(isLoading || isConnecting) ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="flex items-center justify-center">
-                    {typeof wallet.icon === 'string' ? (
-                      <span className="text-2xl">{wallet.icon}</span>
-                    ) : (
-                      wallet.icon
+              <div className="flex items-center space-x-3">
+                <div className="flex-shrink-0">
+                  {wallet.icon}
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center space-x-2">
+                    <h3 className="font-medium text-neutral-gray900">{wallet.name}</h3>
+                    {wallet.recommended && (
+                      <span className="bg-primary-main text-white text-xs px-2 py-1 rounded-full">
+                        Recommended
+                      </span>
                     )}
                   </div>
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <span className="font-medium text-neutral-gray900">{wallet.name}</span>
-                      {wallet.recommended && (
-                        <span className="px-2 py-1 text-xs font-medium bg-primary-main text-white rounded-full">
-                          Recommended
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-sm text-neutral-gray500">{wallet.description}</p>
-                  </div>
+                  <p className="text-sm text-neutral-gray500">{wallet.description}</p>
                 </div>
-                {selectedWallet === wallet.id && isLoading ? (
-                  <Loader2 className="h-5 w-5 text-primary-main animate-spin" />
-                ) : (
-                  <div className="text-neutral-gray400">
-                    →
-                  </div>
+                {selectedWallet === wallet.id && (isLoading || isConnecting) && (
+                  <Loader2 className="h-5 w-5 animate-spin text-primary-main" />
                 )}
               </div>
             </button>
           ))}
         </div>
 
-        {/* Security Notice */}
-        <div className="bg-neutral-gray50 rounded-xl p-4 mb-6">
+        {/* Connection Status */}
+        {isConnecting && (
+          <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <div className="flex items-center space-x-3">
+              <Loader2 className="h-5 w-5 animate-spin text-blue-600" />
+              <div>
+                <p className="text-sm font-medium text-blue-800">Connecting wallet...</p>
+                <p className="text-xs text-blue-600">Please confirm the connection in your wallet</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Success Message */}
+        {isConnected && account && (
+          <div className="mb-6 p-4 bg-green-50 rounded-lg border border-green-200">
+            <div className="flex items-center space-x-3">
+              <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-xs">✓</span>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-green-800">Wallet connected successfully!</p>
+                <p className="text-xs text-green-600">Redirecting to dashboard...</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Security Note */}
+        <div className="bg-neutral-gray50 rounded-lg p-4 border border-neutral-gray200">
           <div className="flex items-start space-x-3">
             <Shield className="h-5 w-5 text-accent-emerald mt-0.5" />
             <div>
-              <h4 className="font-medium text-neutral-gray900 mb-1">Secure Connection</h4>
-              <p className="text-sm text-neutral-gray600">
-                Your wallet connection is encrypted and secure. PowerChain never stores your private keys.
+              <p className="text-sm font-medium text-neutral-gray900">Secure Connection</p>
+              <p className="text-xs text-neutral-gray600 mt-1">
+                Your wallet connection is secured by blockchain technology. We never store your private keys.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Features Preview */}
-        <div className="border-t border-neutral-gray200 pt-4">
-          <p className="text-sm text-neutral-gray600 mb-3">After connecting, you'll be able to:</p>
-          <div className="space-y-2">
-            {[
-              'Trade renewable energy in real-time',
-              'Earn carbon credits automatically',
-              'Participate in community governance',
-              'Access Virtual Power Plant features'
-            ].map((feature, index) => (
-              <div key={index} className="flex items-center space-x-2">
-                <span className="text-primary-main">⚡</span>
-                <span className="text-sm text-neutral-gray700">{feature}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Footer */}
-        <div className="text-center mt-6 pt-4 border-t border-neutral-gray200">
+        <div className="mt-6 text-center">
           <p className="text-xs text-neutral-gray500">
-            By connecting a wallet, you agree to our{' '}
-            <a href="#" className="text-primary-main hover:underline">Terms of Service</a> and{' '}
+            By connecting, you agree to PowerChain's{' '}
+            <a href="#" className="text-primary-main hover:underline">Terms of Service</a>
+            {' '}and{' '}
             <a href="#" className="text-primary-main hover:underline">Privacy Policy</a>
           </p>
         </div>
       </div>
     </div>
   )
-} 
+}

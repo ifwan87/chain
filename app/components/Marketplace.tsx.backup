@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useWallet } from '../providers/WalletProvider'
-import EnergyPurchaseModal from './EnergyPurchaseModal'
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -42,10 +41,6 @@ export default function Marketplace({ isPreview = false, onConnectWallet }: Mark
   const [filterType, setFilterType] = useState<'all' | 'solar' | 'wind' | 'storage'>('all')
   const [searchTerm, setSearchTerm] = useState('')
   const [currentPrice, setCurrentPrice] = useState(0.19)
-  
-  // Purchase Modal State
-  const [selectedOffer, setSelectedOffer] = useState<EnergyOffer | null>(null)
-  const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false)
 
   // Mock data for energy offers
   const [energyOffers] = useState<EnergyOffer[]>([
@@ -173,27 +168,8 @@ export default function Marketplace({ isPreview = false, onConnectWallet }: Mark
       return
     }
     
-    // Convert offer to modal format
-    const modalOffer = {
-      id: offer.id,
-      sellerName: offer.sellerName,
-      sellerAvatar: offer.sellerAvatar,
-      location: offer.location,
-      energyType: offer.energyType as 'solar' | 'wind' | 'storage',
-      amount: offer.quantity,
-      price: offer.price,
-      total: parseFloat((offer.quantity * offer.price).toFixed(2)),
-      carbonCredits: offer.carbonCredits,
-      distance: offer.distance || '0 km'
-    }
-    
-    setSelectedOffer(modalOffer)
-    setIsPurchaseModalOpen(true)
-  }
-
-  const handleModalClose = () => {
-    setIsPurchaseModalOpen(false)
-    setSelectedOffer(null)
+    // Simulate purchase
+    alert(`Purchased ${offer.quantity} kWh from ${offer.sellerName} for RM ${(offer.quantity * offer.price).toFixed(2)}`)
   }
 
   return (
@@ -222,7 +198,7 @@ export default function Marketplace({ isPreview = false, onConnectWallet }: Mark
                 <p className="text-2xl font-bold text-neutral-gray900">2,845</p>
                 <p className="text-xs text-neutral-gray500">kWh traded</p>
               </div>
-              <ShoppingCart className="h-8 w-8 text-primary-main" />
+              <span className="text-4xl text-primary-main">⚡</span>
             </div>
           </div>
 
@@ -233,7 +209,7 @@ export default function Marketplace({ isPreview = false, onConnectWallet }: Mark
                 <p className="text-2xl font-bold text-neutral-gray900">{energyOffers.length}</p>
                 <p className="text-xs text-neutral-gray500">available now</p>
               </div>
-              <Eye className="h-8 w-8 text-secondary-main" />
+              <ShoppingCart className="h-8 w-8 text-secondary-main" />
             </div>
           </div>
 
@@ -242,7 +218,7 @@ export default function Marketplace({ isPreview = false, onConnectWallet }: Mark
               <div>
                 <p className="text-sm text-neutral-gray500">Carbon Credits</p>
                 <p className="text-2xl font-bold text-neutral-gray900">156</p>
-                <p className="text-xs text-neutral-gray500">tons offset today</p>
+                <p className="text-xs text-accent-emerald">tons offset today</p>
               </div>
               <Leaf className="h-8 w-8 text-accent-emerald" />
             </div>
@@ -250,96 +226,75 @@ export default function Marketplace({ isPreview = false, onConnectWallet }: Mark
         </div>
       </div>
 
-      {/* Trading Interface */}
-      <div className="bg-white rounded-xl border border-neutral-gray200 shadow-sm">
-        {/* Tabs */}
-        <div className="flex border-b border-neutral-gray200">
-          <button
-            onClick={() => setActiveTab('buy')}
-            className={`flex-1 py-4 px-6 text-center font-medium ${
-              activeTab === 'buy'
-                ? 'text-primary-main border-b-2 border-primary-main bg-primary-main bg-opacity-5'
-                : 'text-neutral-gray600 hover:text-neutral-gray900'
-            }`}
-          >
-            Buy Energy
-          </button>
-          <button
-            onClick={() => setActiveTab('sell')}
-            className={`flex-1 py-4 px-6 text-center font-medium ${
-              activeTab === 'sell'
-                ? 'text-primary-main border-b-2 border-primary-main bg-primary-main bg-opacity-5'
-                : 'text-neutral-gray600 hover:text-neutral-gray900'
-            }`}
-          >
-            Sell Energy
-          </button>
-        </div>
+      {/* Filters and Search */}
+      <div className="bg-white rounded-xl p-6 border border-neutral-gray200 shadow-sm mb-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          {/* Search */}
+          <div className="relative flex-1 max-w-md">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-neutral-gray400" />
+            <input
+              type="text"
+              placeholder="Search by seller or location..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="input pl-10 w-full"
+            />
+          </div>
 
-        {/* Filters and Search */}
-        <div className="p-6 border-b border-neutral-gray200">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
-            {/* Search */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-neutral-gray400" />
-              <input
-                type="text"
-                placeholder="Search by seller or location..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-neutral-gray300 rounded-lg focus:ring-2 focus:ring-primary-main focus:border-transparent"
-              />
-            </div>
+          {/* Filters */}
+          <div className="flex items-center space-x-4">
+            <select
+              value={filterType}
+              onChange={(e) => setFilterType(e.target.value as any)}
+              className="input min-w-[120px]"
+            >
+              <option value="all">All Types</option>
+              <option value="solar">Solar</option>
+              <option value="wind">Wind</option>
+              <option value="storage">Storage</option>
+            </select>
 
-            {/* Filters */}
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Filter className="h-4 w-4 text-neutral-gray500" />
-                <select
-                  value={filterType}
-                  onChange={(e) => setFilterType(e.target.value as any)}
-                  className="border border-neutral-gray300 rounded-lg px-3 py-2 text-sm"
-                >
-                  <option value="all">All Types</option>
-                  <option value="solar">Solar</option>
-                  <option value="wind">Wind</option>
-                  <option value="storage">Storage</option>
-                </select>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-neutral-gray500">Sort by:</span>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as any)}
-                  className="border border-neutral-gray300 rounded-lg px-3 py-2 text-sm"
-                >
-                  <option value="price">Price</option>
-                  <option value="quantity">Quantity</option>
-                  <option value="distance">Distance</option>
-                </select>
-              </div>
-            </div>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as any)}
+              className="input min-w-[120px]"
+            >
+              <option value="price">Sort by Price</option>
+              <option value="quantity">Sort by Quantity</option>
+              <option value="distance">Sort by Distance</option>
+            </select>
           </div>
         </div>
+      </div>
 
-        {/* Energy Offers */}
-        <div className="p-6">
-          <h3 className="text-lg font-semibold text-neutral-gray900 mb-4">
+      {/* Offers List */}
+      <div className="bg-white rounded-xl border border-neutral-gray200 shadow-sm">
+        <div className="p-6 border-b border-neutral-gray200">
+          <h3 className="text-lg font-semibold text-neutral-gray900">
             Available Energy Offers ({filteredOffers.length})
           </h3>
-          
+        </div>
+
+        <div className="divide-y divide-neutral-gray200">
           {filteredOffers.map((offer) => (
-            <div key={offer.id} className="border border-neutral-gray200 rounded-xl p-4 mb-4 hover:shadow-md transition-shadow">
+            <div key={offer.id} className="p-6 hover:bg-neutral-gray50 transition-colors duration-200">
               <div className="flex items-center justify-between">
-                {/* Seller Info */}
-                <div className="flex items-center space-x-4">
-                  <span className="text-2xl">{offer.sellerAvatar}</span>
-                  <div>
-                    <h4 className="font-medium text-neutral-gray900">{offer.sellerName}</h4>
-                    <div className="flex items-center text-sm text-neutral-gray500">
-                      <MapPin className="h-3 w-3 mr-1" />
-                      {offer.location} • {offer.distance}
+                <div className="flex items-start space-x-4">
+                  {/* Seller Info */}
+                  <div className="flex items-center space-x-3">
+                    <span className="text-2xl">{offer.sellerAvatar}</span>
+                    <div>
+                      <h4 className="font-medium text-neutral-gray900">{offer.sellerName}</h4>
+                      <div className="flex items-center space-x-2 text-sm text-neutral-gray500">
+                        <MapPin className="h-3 w-3" />
+                        <span>{offer.location}</span>
+                        {offer.distance && (
+                          <>
+                            <span>•</span>
+                            <span>{offer.distance}</span>
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
 
@@ -354,8 +309,8 @@ export default function Marketplace({ isPreview = false, onConnectWallet }: Mark
                   {/* Quantity & Price */}
                   <div className="text-right">
                     <p className="font-semibold text-neutral-gray900">{offer.quantity} kWh</p>
-                    <p className="text-lg font-bold text-primary-main">RM {offer.price.toFixed(3)}/kWh</p>
-                    <p className="text-xs text-neutral-gray500">Total: RM {(offer.quantity * offer.price).toFixed(2)}</p>
+                                      <p className="text-lg font-bold text-primary-main">RM {offer.price.toFixed(3)}/kWh</p>
+                  <p className="text-xs text-neutral-gray500">Total: RM {(offer.quantity * offer.price).toFixed(2)}</p>
                   </div>
 
                   {/* Carbon Credits */}
@@ -419,13 +374,6 @@ export default function Marketplace({ isPreview = false, onConnectWallet }: Mark
           </button>
         </div>
       )}
-
-      {/* Energy Purchase Modal */}
-      <EnergyPurchaseModal
-        isOpen={isPurchaseModalOpen}
-        onClose={handleModalClose}
-        offer={selectedOffer}
-      />
     </div>
   )
-}
+} 

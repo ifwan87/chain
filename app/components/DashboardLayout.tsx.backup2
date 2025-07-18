@@ -46,34 +46,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     navigationItems.push({ name: 'Governance', href: '/governance', icon: Users })
   }
 
-  // Get current page title based on pathname
-  const getCurrentPageTitle = () => {
-    switch (pathname) {
-      case '/dashboard':
-        return 'Dashboard'
-      case '/marketplace':
-        return 'Marketplace'
-      case '/energy':
-        return 'Energy Management'
-      case '/trading':
-        return 'Trading'
-      case '/carbon':
-        return 'Carbon Credits'
-      case '/analytics':
-        return 'Analytics'
-      case '/vpp':
-        return 'Virtual Power Plant'
-      case '/governance':
-        return 'DAO Governance'
-      case '/settings':
-        return 'Settings'
-      default:
-        return 'Dashboard'
-    }
-  }
-
   return (
-    <div className="h-screen bg-neutral-gray50 flex overflow-hidden">
+    <div className="min-h-screen bg-neutral-gray50">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div 
@@ -85,12 +59,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-neutral-gray200 transform transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 ${
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-neutral-gray200 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="flex items-center justify-between h-16 px-6 border-b border-neutral-gray200 flex-shrink-0">
+          <div className="flex items-center justify-between h-16 px-6 border-b border-neutral-gray200">
             <div className="flex items-center space-x-1">
               <span className="text-2xl">⚡</span>
               <span className="text-xl font-bold text-neutral-gray900">PowerChain</span>
@@ -104,7 +78,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
 
           {/* User Info */}
-          <div className="p-6 border-b border-neutral-gray200 flex-shrink-0">
+          <div className="p-6 border-b border-neutral-gray200">
             <div className="flex items-center space-x-3">
               <span className="text-2xl">{user?.avatar}</span>
               <div>
@@ -129,7 +103,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+          <nav className="flex-1 px-3 py-4 space-y-1">
             {navigationItems.map((item) => {
               const isActive = pathname === item.href
               return (
@@ -154,7 +128,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </nav>
 
           {/* Footer */}
-          <div className="p-3 border-t border-neutral-gray200 flex-shrink-0">
+          <div className="p-3 border-t border-neutral-gray200">
             <Link
               href="/settings"
               className="flex items-center px-3 py-2 text-sm font-medium text-neutral-gray700 hover:bg-neutral-gray100 rounded-lg transition-colors duration-200"
@@ -174,9 +148,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="lg:pl-64">
         {/* Top header */}
-        <header className="bg-white border-b border-neutral-gray200 px-6 py-4 flex-shrink-0">
+        <header className="bg-white border-b border-neutral-gray200 px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
@@ -185,7 +159,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               >
                 <Menu className="h-6 w-6" />
               </button>
-              <h1 className="text-xl font-semibold text-neutral-gray900">{getCurrentPageTitle()}</h1>
+              <h1 className="text-xl font-semibold text-neutral-gray900">Dashboard</h1>
             </div>
 
             <div className="flex items-center space-x-4">
@@ -208,7 +182,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-6 overflow-y-auto">
+        <main className="p-6">
           {children}
         </main>
       </div>

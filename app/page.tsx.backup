@@ -1,8 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { useWallet } from './providers/WalletProvider'
+import { useState } from 'react'
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
 import Features from './components/Features'
@@ -14,41 +12,6 @@ import WalletConnectModal from './components/WalletConnectModal'
 export default function HomePage() {
   const [showMarketplace, setShowMarketplace] = useState(false)
   const [showWalletModal, setShowWalletModal] = useState(false)
-  const { isConnected, isInitializing } = useWallet()
-  const router = useRouter()
-
-  // Redirect to dashboard if already connected
-  useEffect(() => {
-    if (!isInitializing && isConnected) {
-      console.log('✅ User already connected, redirecting to dashboard...')
-      window.location.href = '/dashboard'
-    }
-  }, [isConnected, isInitializing])
-
-  // Show loading while checking wallet connection
-  if (isInitializing) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-main mx-auto mb-4"></div>
-          <p className="text-neutral-gray600">Loading PowerChain...</p>
-        </div>
-      </div>
-    )
-  }
-
-  // Show redirect message if connected
-  if (isConnected) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-main mx-auto mb-4"></div>
-          <p className="text-neutral-gray600">Redirecting to dashboard...</p>
-          <p className="text-xs text-gray-500 mt-2">Wallet connected successfully</p>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <main className="min-h-screen bg-white">
@@ -85,24 +48,18 @@ export default function HomePage() {
               </button>
             </div>
             <div className="p-6 overflow-y-auto max-h-[80vh]">
-              <Marketplace 
-                isPreview={true}
-                onConnectWallet={() => {
-                  setShowMarketplace(false)
-                  setShowWalletModal(true)
-                }}
-              />
+              <Marketplace isPreview={true} onConnectWallet={() => setShowWalletModal(true)} />
             </div>
           </div>
         </div>
       )}
-
-      <Footer />
-
+      
       <WalletConnectModal 
         isOpen={showWalletModal}
         onClose={() => setShowWalletModal(false)}
       />
+      
+      <Footer />
     </main>
   )
-}
+} 

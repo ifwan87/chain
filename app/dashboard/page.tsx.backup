@@ -11,28 +11,14 @@ import QuickActions from '../components/dashboard/QuickActions'
 import CarbonCredits from '../components/dashboard/CarbonCredits'
 
 export default function DashboardPage() {
-  const { isConnected, user, isInitializing } = useWallet() // NEW: Use isInitializing
+  const { isConnected, user } = useWallet()
   const router = useRouter()
 
   useEffect(() => {
-    // FIXED: Only redirect if initialization is complete AND not connected
-    if (!isInitializing && !isConnected) {
-      console.log('🔄 Wallet not connected after initialization, redirecting to home...')
+    if (!isConnected) {
       router.push('/')
     }
-  }, [isConnected, isInitializing, router]) // Include isInitializing in dependencies
-
-  // IMPROVED: Show loading while initializing or not connected
-  if (isInitializing) {
-    return (
-      <div className="min-h-screen bg-neutral-gray50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-main mx-auto mb-4"></div>
-          <p className="text-neutral-gray600">Restoring wallet connection...</p>
-        </div>
-      </div>
-    )
-  }
+  }, [isConnected, router])
 
   if (!isConnected || !user) {
     return (
