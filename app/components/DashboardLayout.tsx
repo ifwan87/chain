@@ -38,8 +38,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   ]
 
   // Add role-specific menu items
-  if (user?.role === 'producer' || user?.role === 'vpp_operator') {
-    navigationItems.splice(4, 0, { name: 'VPP', href: '/vpp', icon: Users })
+  if (user?.role === 'producer' || user?.role === 'hub_operator') {
+    navigationItems.splice(4, 0, { name: 'Energy Hub', href: '/energy-hub', icon: Users })
   }
 
   if (user?.role === 'dao_member' || user?.role === 'trader') {
@@ -61,8 +61,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         return 'Carbon Credits'
       case '/analytics':
         return 'Analytics'
-      case '/vpp':
-        return 'Virtual Power Plant'
+      case '/energy-hub':
+        return 'Energy Hub'
       case '/governance':
         return 'DAO Governance'
       case '/settings':

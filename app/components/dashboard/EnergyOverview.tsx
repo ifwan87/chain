@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { TrendingUp, TrendingDown, Battery, Sun } from 'lucide-react'
 
 interface EnergyOverviewProps {
-  userRole: 'producer' | 'consumer' | 'trader' | 'dao_member' | 'vpp_operator'
+  userRole: 'producer' | 'consumer' | 'trader' | 'dao_member' | 'hub_operator'
 }
 
 export default function EnergyOverview({ userRole }: EnergyOverviewProps) {
@@ -69,18 +69,18 @@ export default function EnergyOverview({ userRole }: EnergyOverviewProps) {
           color: 'text-purple-600',
           bgColor: 'bg-purple-100'
         }
-      case 'vpp_operator':
+      case 'hub_operator':
         return {
-          title: 'VPP Energy Management',
-          subtitle: 'Aggregate energy production and distribution',
-          currentLabel: 'Total Output',
+          title: 'Energy Hub Management',
+          subtitle: 'Community energy pooling and grid transactions',
+          currentLabel: 'Total Pool Output',
           currentUnit: 'MW',
-          todayLabel: 'Today\'s Generation',
+          todayLabel: 'Today\'s Grid Sales',
           monthLabel: 'This Month',
           monthUnit: 'MWh',
           icon: Battery,
-          color: 'text-green-600',
-          bgColor: 'bg-green-100'
+          color: 'text-emerald-600',
+          bgColor: 'bg-emerald-100'
         }
       default:
         return {

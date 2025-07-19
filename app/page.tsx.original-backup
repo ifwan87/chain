@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { useWallet } from './providers/WalletProvider'
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
-import ImageSections from './components/ImageSections'
 import Features from './components/Features'
 import DashboardPreview from './components/DashboardPreview'
 import Marketplace from './components/Marketplace'
@@ -65,14 +64,10 @@ export default function HomePage() {
         />
         
         <div className="animate-fade-in-up" style={{ animationDelay: '1.2s', animationFillMode: 'both' }}>
-          <ImageSections />
-        </div>
-        
-        <div className="animate-fade-in-up" style={{ animationDelay: '1.4s', animationFillMode: 'both' }}>
           <Features />
         </div>
         
-        <div className="animate-fade-in-up" style={{ animationDelay: '1.6s', animationFillMode: 'both' }}>
+        <div className="animate-fade-in-up" style={{ animationDelay: '1.4s', animationFillMode: 'both' }}>
           <DashboardPreview onConnectWallet={() => setShowWalletModal(true)} />
         </div>
       </div>

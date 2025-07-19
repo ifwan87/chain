@@ -25,7 +25,12 @@ export default function Navigation({ onMarketplaceClick, onConnectWallet }: Navi
   const navigationItems = [
     { name: 'Home', href: '/', current: true },
     { name: 'Marketplace', href: '#', onClick: onMarketplaceClick },
-    { name: 'Features', href: '#features' },
+    { name: 'Features', href: '#features', onClick: () => {
+      const featuresSection = document.getElementById('features')
+      if (featuresSection) {
+        featuresSection.scrollIntoView({ behavior: 'smooth' })
+      }
+    }},
     { name: 'About', href: '#about' },
   ]
 
@@ -132,7 +137,14 @@ export default function Navigation({ onMarketplaceClick, onConnectWallet }: Navi
                 <button
                   key={item.name}
                   onClick={() => {
-                    item.onClick?.()
+                    if (item.name === 'Features') {
+                      const featuresSection = document.getElementById('features')
+                      if (featuresSection) {
+                        featuresSection.scrollIntoView({ behavior: 'smooth' })
+                      }
+                    } else {
+                      item.onClick?.()
+                    }
                     setIsMenuOpen(false)
                   }}
                   className="block w-full text-left px-3 py-2 text-base font-medium text-neutral-gray600 hover:text-neutral-gray900 hover:bg-neutral-gray50 rounded-md"

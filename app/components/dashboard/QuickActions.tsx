@@ -7,11 +7,12 @@ import {
   Eye,
   Users,
   Settings,
-  BarChart3
+  BarChart3,
+  Leaf
 } from 'lucide-react'
 
 interface QuickActionsProps {
-  userRole: 'producer' | 'consumer' | 'trader' | 'dao_member' | 'vpp_operator'
+  userRole: 'producer' | 'consumer' | 'trader' | 'dao_member' | 'hub_operator'
 }
 
 export default function QuickActions({ userRole }: QuickActionsProps) {
@@ -19,6 +20,7 @@ export default function QuickActions({ userRole }: QuickActionsProps) {
     const baseActions = [
       { name: 'View Marketplace', icon: Eye, href: '/marketplace', color: 'bg-blue-500' },
       { name: 'Buy Energy', icon: ShoppingCart, href: '/marketplace?action=buy', color: 'bg-green-500' },
+      { name: 'Carbon Credits', icon: Leaf, href: '/carbon', color: 'bg-emerald-500' },
     ]
 
     switch (userRole) {
@@ -27,7 +29,7 @@ export default function QuickActions({ userRole }: QuickActionsProps) {
           ...baseActions,
           { name: 'Sell Energy', icon: TrendingUp, href: '/marketplace?action=sell', color: 'bg-purple-500' },
           { name: 'Monitor Production', icon: null, href: '/energy', color: 'bg-yellow-500', customIcon: '⚡' },
-          { name: 'Join VPP', icon: Users, href: '/vpp', color: 'bg-indigo-500' },
+          { name: 'Join Energy Hub', icon: Users, href: '/energy-hub', color: 'bg-indigo-500' },
         ]
       case 'consumer':
         return [
@@ -48,12 +50,12 @@ export default function QuickActions({ userRole }: QuickActionsProps) {
           { name: 'Governance', icon: Users, href: '/governance', color: 'bg-cyan-500' },
           { name: 'Vote on Proposals', icon: Plus, href: '/governance?tab=voting', color: 'bg-teal-500' },
         ]
-      case 'vpp_operator':
+      case 'hub_operator':
         return [
           ...baseActions,
-          { name: 'Manage VPP', icon: Users, href: '/vpp', color: 'bg-indigo-500' },
+          { name: 'Manage Energy Hub', icon: Users, href: '/energy-hub', color: 'bg-indigo-500' },
           { name: 'Grid Analytics', icon: BarChart3, href: '/analytics', color: 'bg-red-500' },
-          { name: 'Energy Distribution', icon: null, href: '/energy', color: 'bg-yellow-500', customIcon: '⚡' },
+          { name: 'Community Pool', icon: null, href: '/energy-hub?tab=pooling', color: 'bg-emerald-500', customIcon: '🏘️' },
         ]
       default:
         return baseActions

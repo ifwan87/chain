@@ -1,0 +1,95 @@
+{
+    "designSystem": {
+      "name": "Helium Network Design System",
+      "version": "1.0.0",
+      "description": "Comprehensive design system extracted from Helium.com interface"
+    },
+    "colorPalette": {
+      "primary": {
+        "heliumBlue": "#4A90E2",
+        "heliumPurple": "#8B5CF6",
+        "heliumTeal": "#06B6D4",
+        "heliumNavy": "#1E293B"
+      },
+      "gradients": {
+        "primaryHero": "linear-gradient(135deg, #1E293B 0%, #4C1D95 50%, #7C3AED 100%)",
+        "blueCard": "linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%)",
+        "purpleCard": "linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%)",
+        "overlayGradient": "linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(76, 29, 149, 0.6) 100%)"
+      },
+      "neutral": {
+        "white": "#FFFFFF",
+        "lightGray": "#F8FAFC",
+        "mediumGray": "#94A3B8",
+        "darkGray": "#475569",
+        "black": "#0F172A"
+      },
+      "semantic": {
+        "success": "#10B981",
+        "warning": "#F59E0B",
+        "error": "#EF4444",
+        "info": "#3B82F6"
+      }
+    },
+    "typography": {
+      "fontFamily": {
+        "primary": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        "monospace": "'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace"
+      },
+      "fontWeights": {
+        "light": 300,
+        "regular": 400,
+        "medium": 500,
+        "semiBold": 600,
+        "bold": 700,
+        "extraBold": 800
+      },
+      "fontSize": {
+        "xs": "0.75rem",
+        "sm": "0.875rem",
+        "base": "1rem",
+        "lg": "1.125rem",
+        "xl": "1.25rem",
+        "2xl": "1.5rem",
+        "3xl": "1.875rem",
+        "4xl": "2.25rem",
+        "5xl": "3rem",
+        "6xl": "3.75rem"
+      },
+      "lineHeight": {
+        "tight": 1.25,
+        "normal": 1.5,
+        "relaxed": 1.75
+      }
+    },
+    "spacing": {
+      "xs": "0.25rem",
+      "sm": "0.5rem",
+      "md": "1rem",
+      "lg": "1.5rem",
+      "xl": "2rem",
+      "2xl": "3rem",
+      "3xl": "4rem",
+      "4xl": "6rem",
+      "5xl": "8rem"
+    },
+    "borderRadius": {
+      "none": "0",
+      "sm": "0.125rem",
+      "md": "0.375rem",
+      "lg": "0.5rem",
+      "xl": "0.75rem",
+      "2xl": "1rem",
+      "3xl": "1.5rem",
+      "full": "9999px"
+    },
+    "shadows": {
+      "sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+      "md": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+      "lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+      "xl": "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+      "2xl": "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+      "inner": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)",
+      "glow": "0 0 20px rgba(139, 92, 246, 0.3)"
+    }
+  }

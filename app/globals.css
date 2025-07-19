@@ -283,3 +283,60 @@ a {
 .grid-box:hover {
   animation: grid-pulse 0.3s ease-in-out;
 } 
+
+/* Helium-inspired animations */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px);
+  }
+  50% { 
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Helium card hover effects */
+.helium-card-hover {
+  transition: all 0.3s ease;
+}
+
+.helium-card-hover:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Helium button styles */
+.helium-button-primary {
+  background: #0F172A;
+  color: #FFFFFF;
+  border-radius: 2rem;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.helium-button-primary:hover {
+  background: #1E293B;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.helium-button-secondary {
+  background: transparent;
+  color: #FFFFFF;
+  border-radius: 2rem;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.helium-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+} 

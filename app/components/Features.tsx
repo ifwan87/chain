@@ -20,10 +20,10 @@ export default function Features() {
     },
     {
       icon: null,
-      title: 'Virtual Power Plant (VPP)',
-      description: 'Pool your solar panels and storage with others to sell excess energy to the grid and maximize returns.',
+      title: 'Energy Hub Community Pooling',
+      description: 'Pool solar panels and storage with neighbors to create a unified energy hub. Sell excess community energy to the national grid with competitive pricing.',
       gradient: 'from-yellow-500 to-orange-600',
-      customIcon: '⚡'
+      customIcon: '🏘️'
     },
     {
       icon: Leaf,

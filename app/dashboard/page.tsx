@@ -60,7 +60,7 @@ export default function DashboardPage() {
                 {user.role === 'consumer' && 'Track your energy consumption and purchases'}
                 {user.role === 'trader' && 'Manage your energy trading portfolio'}
                 {user.role === 'dao_member' && 'Participate in community governance'}
-                {user.role === 'vpp_operator' && 'Oversee Virtual Power Plant operations'}
+                {user.role === 'hub_operator' && 'Manage community energy pooling and grid operations'}
               </p>
             </div>
             <div className="text-right">

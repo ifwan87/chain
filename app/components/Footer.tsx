@@ -10,7 +10,7 @@ export default function Footer() {
         { name: 'Marketplace', href: '#marketplace' },
         { name: 'Dashboard', href: '/dashboard' },
         { name: 'Carbon Credits', href: '/carbon' },
-        { name: 'VPP', href: '/vpp' },
+        { name: 'Energy Hub', href: '/energy-hub' },
       ]
     },
     {

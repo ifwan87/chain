@@ -6,7 +6,7 @@ A decentralized smart solar energy trading platform powered by MasChain blockcha
 
 ### Core Platform Features
 - **Real-time Energy Trading**: Live bidding and selling of renewable energy with dynamic pricing
-- **Virtual Power Plant (VPP)**: Pool solar panels and storage to sell excess energy to the grid
+- **Energy Hub Community Pooling**: Pool solar panels and storage with neighbors to sell excess energy to the national grid
 - **Carbon Credit Rewards**: Earn carbon credits automatically for renewable energy exports
 - **DAO Governance**: Participate in decentralized governance and vote on platform policies
 - **AI-Powered Pricing**: Dynamic pricing based on real-time supply and demand
@@ -88,12 +88,12 @@ Navigate to [http://localhost:3000](http://localhost:3000)
 - Access exclusive features
 - Shape platform development
 
-#### ⚡ **VPP Operator** (Virtual Power Plant Managers)
-- Manage aggregated energy resources
-- Coordinate grid services
-- Monitor distributed energy assets
-- Distribute revenue shares
-- Optimize energy distribution
+#### ⚡ **Energy Hub Operator** (Community Energy Managers)
+- Manage aggregated community energy resources
+- Coordinate grid sales and competitive pricing
+- Monitor distributed energy assets across neighborhoods
+- Distribute revenue shares to community members
+- Optimize energy pooling and distribution
 
 ## 🏗️ Architecture
 

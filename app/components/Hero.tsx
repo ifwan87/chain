@@ -1,130 +1,207 @@
 'use client'
 
-import { ArrowRight, TrendingUp, Leaf, Shield } from 'lucide-react'
-import { ChromeGrid } from './ChromeGrid'
+import { ArrowRight, TrendingUp, Leaf, Shield, Zap } from 'lucide-react'
 
 interface HeroProps {
   onExploreMarketplace: () => void
   onConnectWallet: () => void
 }
 
+// Network Dots Animation Component
+const NetworkDots = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Large floating dots */}
+      <div className="absolute top-1/4 left-1/6 w-3 h-3 bg-white opacity-70 rounded-full animate-float"></div>
+      <div className="absolute top-1/3 right-1/4 w-2 h-2 bg-white opacity-50 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute bottom-1/3 left-1/3 w-4 h-4 bg-white opacity-30 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute top-2/3 right-1/3 w-1.5 h-1.5 bg-white opacity-60 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
+      <div className="absolute bottom-1/4 left-2/3 w-2.5 h-2.5 bg-white opacity-40 rounded-full animate-float" style={{ animationDelay: '1.5s' }}></div>
+      
+      {/* Connecting lines */}
+      <svg className="absolute inset-0 w-full h-full" style={{ opacity: 0.1 }}>
+        <line x1="16%" y1="25%" x2="33%" y2="66%" stroke="white" strokeWidth="1" strokeDasharray="2,4" />
+        <line x1="75%" y1="33%" x2="66%" y2="75%" stroke="white" strokeWidth="1" strokeDasharray="2,4" />
+        <line x1="33%" y1="66%" x2="66%" y2="33%" stroke="white" strokeWidth="1" strokeDasharray="2,4" />
+      </svg>
+    </div>
+  )
+}
+
 export default function Hero({ onExploreMarketplace, onConnectWallet }: HeroProps) {
   return (
-    <section className="relative pt-20 pb-16 sm:pt-24 sm:pb-20 bg-gradient-hero overflow-hidden">
-      {/* Chrome Grid Background */}
-      <ChromeGrid />
+    <section className="relative min-h-screen overflow-hidden" style={{
+      background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 30%, #4C1D95 70%, #7C3AED 100%)'
+    }}>
+      {/* Network Dots Background */}
+      <NetworkDots />
       
-              {/* Background Animation */}
-        <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 2 }}>
-          <div className="absolute -top-10 -right-10 w-96 h-96 bg-gradient-to-br from-primary-main to-secondary-main opacity-10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute -bottom-10 -left-10 w-96 h-96 bg-gradient-to-tr from-secondary-main to-primary-main opacity-10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-yellow-400 bg-opacity-5 rounded-full blur-2xl animate-ping"></div>
-        </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ zIndex: 3 }}>
-        <div className="text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-white bg-opacity-20 backdrop-filter backdrop-blur-sm border border-white border-opacity-30 mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
-            <span className="text-white mr-2 animate-pulse">⚡</span>
-            <span className="text-white text-sm font-medium">Powered by MasChain Blockchain</span>
-          </div>
-
-          {/* Main Heading */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight animate-fade-in-up" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
-            Trade Solar Energy
-            <br />
-            <span className="bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent animate-pulse">
-              Directly with Neighbors
-            </span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-xl sm:text-2xl text-white text-opacity-90 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
-            Join the decentralized energy revolution. Buy and sell renewable energy using blockchain technology, 
-            earn carbon credits, and create a sustainable future together.
-          </p>
-
-          {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.8s', animationFillMode: 'both' }}>
-            <div className="glass rounded-xl p-4 hover:bg-white hover:bg-opacity-20 transition-all duration-300 animate-float" style={{ animationDelay: '0.5s' }}>
-              <div className="flex items-center justify-center mb-2">
-                <TrendingUp className="h-6 w-6 text-white animate-glow" />
-              </div>
-              <div className="text-2xl font-bold text-white">RM 0.18</div>
-              <div className="text-sm text-white text-opacity-80">per kWh</div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20" style={{ zIndex: 10 }}>
+        <div className="grid lg:grid-cols-12 gap-8 items-center min-h-screen">
+          
+          {/* Left Content - Hero Text */}
+          <div className="lg:col-span-7 text-left">
+            {/* Badge */}
+            <div className="inline-flex items-center px-6 py-3 rounded-full mb-8 transform hover:scale-105 transition-all duration-300" style={{
+              background: 'linear-gradient(135deg, #8B5CF6 0%, #A855F7 100%)',
+              boxShadow: '0 10px 15px -3px rgba(139, 92, 246, 0.3)'
+            }}>
+              <Zap className="w-5 h-5 text-white mr-2" />
+              <span className="text-white text-sm font-semibold">Powered by MasChain Blockchain</span>
             </div>
-            <div className="glass rounded-xl p-4 hover:bg-white hover:bg-opacity-20 transition-all duration-300 animate-float" style={{ animationDelay: '1s' }}>
-              <div className="flex items-center justify-center mb-2">
-                <Leaf className="h-6 w-6 text-white animate-glow" />
-              </div>
-              <div className="text-2xl font-bold text-white">1,250+</div>
-              <div className="text-sm text-white text-opacity-80">Active Traders</div>
-            </div>
-            <div className="glass rounded-xl p-4 hover:bg-white hover:bg-opacity-20 transition-all duration-300 animate-float" style={{ animationDelay: '1.5s' }}>
-              <div className="flex items-center justify-center mb-2">
-                <Shield className="h-6 w-6 text-white animate-glow" />
-              </div>
-              <div className="text-2xl font-bold text-white">50K+</div>
-              <div className="text-sm text-white text-opacity-80">kWh Traded</div>
-            </div>
-          </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up" style={{ animationDelay: '1s', animationFillMode: 'both' }}>
-            <button
-              onClick={onExploreMarketplace}
-              className="btn-cta group flex items-center space-x-2 hover:scale-105 transform transition-all duration-300"
-            >
-              <span>Explore Marketplace</span>
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
-            </button>
-            
-            <button
-              onClick={onConnectWallet}
-              className="btn-secondary bg-white bg-opacity-20 backdrop-filter backdrop-blur-sm border-white border-opacity-30 text-white hover:bg-opacity-30 hover:scale-105 transform transition-all duration-300"
-            >
-              Connect Wallet to Start Trading
-            </button>
-          </div>
+            {/* Main Title - Helium Style */}
+            <h1 className="text-white mb-6" style={{
+              fontSize: '3.75rem',
+              fontWeight: 800,
+              lineHeight: 1.25,
+              letterSpacing: '-0.02em'
+            }}>
+              Trade Solar Energy
+              <br />
+              <span style={{ 
+                background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>
+                Directly with Neighbors
+              </span>
+            </h1>
 
-          {/* Trust Indicators */}
-          <div className="mt-12 pt-8 border-t border-white border-opacity-20">
-            <p className="text-white text-opacity-70 text-sm mb-4">Trusted by renewable energy leaders</p>
-            <div className="flex items-center justify-center space-x-8 opacity-60">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">MS</span>
+            {/* Subtitle */}
+            <p className="text-slate-300 mb-8 max-w-2xl" style={{
+              fontSize: '1.125rem',
+              fontWeight: 400,
+              lineHeight: 1.75
+            }}>
+              Join the decentralized energy revolution. Buy and sell renewable energy using blockchain technology, 
+              earn carbon credits, and create a sustainable future together.
+            </p>
+
+            {/* CTA Buttons - Helium Style */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+              <button
+                onClick={onExploreMarketplace}
+                className="group px-8 py-4 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 flex items-center justify-center helium-button-primary"
+              >
+                <span>Explore Marketplace</span>
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
+              </button>
+              
+              <button
+                onClick={onConnectWallet}
+                className="px-8 py-4 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105 helium-button-secondary"
+              >
+                Connect Wallet to Start Trading
+              </button>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="flex items-center space-x-8 opacity-70">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{
+                  background: 'rgba(255, 255, 255, 0.1)'
+                }}>
+                  <span className="text-white font-bold text-sm">MS</span>
                 </div>
                 <span className="text-white text-sm">MasChain</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">SE</span>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{
+                  background: 'rgba(255, 255, 255, 0.1)'
+                }}>
+                  <span className="text-white font-bold text-sm">BC</span>
                 </div>
-                <span className="text-white text-sm">Solar Energy</span>
+                <span className="text-white text-sm">Blockchain Secured</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">GC</span>
+            </div>
+          </div>
+
+          {/* Right Content - Cards Grid */}
+          <div className="lg:col-span-5 grid grid-cols-1 gap-6">
+            
+            {/* Energy Trading Card */}
+            <div className="rounded-3xl p-8 transform hover:scale-105 transition-all duration-300 helium-card-hover" style={{
+              background: 'linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%)',
+              boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+            }}>
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{
+                background: 'rgba(255, 255, 255, 0.1)'
+              }}>
+                <TrendingUp className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-white text-2xl font-bold mb-2 leading-tight">
+                Real-time Trading
+              </h3>
+              <p className="text-white/90 text-lg font-normal leading-relaxed">
+                Live energy marketplace with AI-powered pricing
+              </p>
+            </div>
+
+            {/* Two smaller cards side by side */}
+            <div className="grid grid-cols-2 gap-6">
+              
+              {/* Carbon Credits Card */}
+              <div className="rounded-3xl p-6 transform hover:scale-105 transition-all duration-300 helium-card-hover" style={{
+                background: 'linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%)',
+                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+              }}>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{
+                  background: 'rgba(255, 255, 255, 0.1)'
+                }}>
+                  <Leaf className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-white text-sm">Green Certified</span>
+                <h3 className="text-white text-lg font-bold mb-1">
+                  Carbon Credits
+                </h3>
+                <p className="text-white/90 text-sm">
+                  Earn rewards for every kWh
+                </p>
+              </div>
+
+              {/* Security Card */}
+              <div className="rounded-3xl p-6 transform hover:scale-105 transition-all duration-300 helium-card-hover" style={{
+                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+              }}>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{
+                  background: 'rgba(255, 255, 255, 0.1)'
+                }}>
+                  <Shield className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="text-white text-lg font-bold mb-1">
+                  Secure Trading
+                </h3>
+                <p className="text-white/90 text-sm">
+                  Blockchain guaranteed
+                </p>
+              </div>
+            </div>
+
+            {/* Stats Card */}
+            <div className="rounded-3xl p-8 transform hover:scale-105 transition-all duration-300 helium-card-hover" style={{
+              background: '#FFFFFF',
+              boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+            }}>
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <div className="text-2xl font-bold text-slate-900">RM 0.18</div>
+                  <div className="text-sm text-slate-600">per kWh</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-slate-900">1,250+</div>
+                  <div className="text-sm text-slate-600">Active Traders</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-slate-900">50K+</div>
+                  <div className="text-sm text-slate-600">kWh Traded</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Floating Energy Particles */}
-      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 4 }}>
-        <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-gradient-to-r from-primary-main to-secondary-main rounded-full opacity-80 animate-ping shadow-lg"></div>
-        <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-secondary-main rounded-full opacity-60 animate-pulse shadow-md"></div>
-        <div className="absolute bottom-1/3 left-1/3 w-2 h-2 bg-gradient-to-r from-yellow-400 to-primary-main rounded-full opacity-70 animate-bounce shadow-md"></div>
-        <div className="absolute top-3/4 right-1/3 w-1.5 h-1.5 bg-primary-main rounded-full opacity-50 animate-ping shadow-sm"></div>
-        <div className="absolute top-1/6 right-1/6 w-2 h-2 bg-gradient-to-r from-secondary-main to-yellow-400 rounded-full opacity-60 animate-pulse shadow-md"></div>
-        <div className="absolute bottom-1/4 right-1/2 w-1 h-1 bg-gradient-to-r from-primary-main to-purple-400 rounded-full opacity-70 animate-bounce shadow-sm"></div>
-        <div className="absolute top-2/3 left-1/6 w-1.5 h-1.5 bg-accent-emerald rounded-full opacity-50 animate-ping shadow-sm"></div>
-        <div className="absolute top-1/3 left-2/3 w-1 h-1 bg-gradient-to-r from-primary-main to-secondary-main rounded-full opacity-60 animate-pulse shadow-sm"></div>
-      </div>
     </section>
   )
-} 
+}
