@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useWallet } from '../providers/WalletProvider'
 import DashboardLayout from '../components/DashboardLayout'
@@ -22,7 +22,7 @@ import {
   Shield
 } from 'lucide-react'
 
-export default function EnergyHubPage() {
+function EnergyHubContent() {
   const { isConnected, user, isInitializing } = useWallet()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -651,5 +651,20 @@ export default function EnergyHubPage() {
         {renderTabContent()}
       </div>
     </DashboardLayout>
+  )
+}
+
+export default function EnergyHubPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-neutral-gray50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-main mx-auto mb-4"></div>
+          <p className="text-neutral-gray600">Loading Energy Hub...</p>
+        </div>
+      </div>
+    }>
+      <EnergyHubContent />
+    </Suspense>
   )
 } 
