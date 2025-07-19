@@ -3,6 +3,20 @@
 import { useState, useEffect } from 'react'
 import { useWallet } from '../providers/WalletProvider'
 import EnergyPurchaseModal from './EnergyPurchaseModal'
+
+// Type for EnergyPurchaseModal
+interface PurchaseModalOffer {
+  id: string
+  sellerName: string
+  sellerAvatar: string
+  location: string
+  energyType: 'solar' | 'wind' | 'storage'
+  amount: number
+  price: number
+  total: number
+  carbonCredits: number
+  distance: string
+}
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -44,7 +58,7 @@ export default function Marketplace({ isPreview = false, onConnectWallet }: Mark
   const [currentPrice, setCurrentPrice] = useState(0.19)
   
   // Purchase Modal State
-  const [selectedOffer, setSelectedOffer] = useState<EnergyOffer | null>(null)
+  const [selectedOffer, setSelectedOffer] = useState<PurchaseModalOffer | null>(null)
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false)
 
   // Mock data for energy offers
@@ -173,13 +187,13 @@ export default function Marketplace({ isPreview = false, onConnectWallet }: Mark
       return
     }
     
-    // Convert offer to modal format
-    const modalOffer = {
+    // Convert offer to modal format that matches EnergyPurchaseModal interface
+    const modalOffer: PurchaseModalOffer = {
       id: offer.id,
       sellerName: offer.sellerName,
       sellerAvatar: offer.sellerAvatar,
       location: offer.location,
-      energyType: offer.energyType as 'solar' | 'wind' | 'storage',
+      energyType: offer.energyType,
       amount: offer.quantity,
       price: offer.price,
       total: parseFloat((offer.quantity * offer.price).toFixed(2)),
