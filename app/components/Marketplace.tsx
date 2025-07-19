@@ -188,6 +188,7 @@ export default function Marketplace({ isPreview = false, onConnectWallet }: Mark
     }
     
     // Convert offer to modal format that matches EnergyPurchaseModal interface
+    // Fixed TypeScript type mismatch for Vercel deployment
     const modalOffer: PurchaseModalOffer = {
       id: offer.id,
       sellerName: offer.sellerName,
