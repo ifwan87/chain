@@ -45,7 +45,8 @@ export default function TradingPage() {
     carbonCreditsEarned: 142.3,
     tradingEfficiency: 0.91, // %
     monthlyGrowth: 12.5, // %
-    activeOrders: 8
+    activeOrders: 8,
+    tradingStreak: 15 // days
   })
 
   const [transactions, setTransactions] = useState([
