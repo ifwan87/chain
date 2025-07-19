@@ -591,7 +591,7 @@ export default function EnergyPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-neutral-gray600">Efficiency</span>
-                    <span className="font-semibold text-emerald-600">{(device.efficiency * 100).toFixed(1)}%</span>
+                    <span className="font-semibold text-emerald-600">{((device.efficiency || 0) * 100).toFixed(1)}%</span>
                   </div>
                 </>
               )}
@@ -608,7 +608,7 @@ export default function EnergyPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-neutral-gray600">Health</span>
-                    <span className="font-semibold text-emerald-600">{(device.health * 100).toFixed(1)}%</span>
+                    <span className="font-semibold text-emerald-600">{((device.health || 0) * 100).toFixed(1)}%</span>
                   </div>
                 </>
               )}
@@ -617,11 +617,11 @@ export default function EnergyPage() {
                 <>
                   <div className="flex justify-between">
                     <span className="text-neutral-gray600">Accuracy</span>
-                    <span className="font-semibold">{(device.accuracy * 100).toFixed(1)}%</span>
+                    <span className="font-semibold">{((device.accuracy || 0) * 100).toFixed(1)}%</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-neutral-gray600">Last Reading</span>
-                    <span className="font-semibold">{new Date(device.lastReading).toLocaleString()}</span>
+                    <span className="font-semibold">{device.lastReading ? new Date(device.lastReading).toLocaleString() : 'N/A'}</span>
                   </div>
                 </>
               )}
