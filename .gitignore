@@ -22,7 +22,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Local env files
+# Environment files - SECURITY CRITICAL
+.env
+.env.local
+.env.development
+.env.production
+.env.test
 .env*.local
 
 # Vercel
@@ -41,4 +46,47 @@ Thumbs.db
 
 # Temporary files
 *.tmp
-*.temp 
+*.temp
+
+# Blockchain & Crypto - SECURITY CRITICAL
+secrets.json
+private-keys.txt
+mnemonic.txt
+wallet-backup.*
+keystore/
+wallets/
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Contract deployment artifacts
+deployments/localhost/
+deployments/hardhat/
+deployments/.chainId
+gas-report.txt
+coverage.json
+coverage/
+
+# Backup files
+*.backup
+*.backup[0-9]
+*.bak
+*~
+
+# Cache and logs
+cache/
+logs/
+*.log
+.cache/
+hardhat-logs/
+
+# Package manager
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Development tools
+.env.example.filled
+development-config.json
+test-accounts.json 
