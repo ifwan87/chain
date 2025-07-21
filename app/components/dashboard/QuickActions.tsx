@@ -67,12 +67,12 @@ export default function QuickActions({ userRole }: QuickActionsProps) {
   return (
     <div className="bg-white rounded-xl p-6 border border-neutral-gray200 shadow-sm">
       <h2 className="text-lg font-semibold text-neutral-gray900 mb-4">Quick Actions</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      <div className="flex flex-wrap gap-4 justify-center md:justify-start">
         {actions.map((action, index) => (
           <a
             key={index}
             href={action.href}
-            className="group flex flex-col items-center p-4 rounded-xl border border-neutral-gray200 hover:border-neutral-gray300 hover:shadow-md transition-all duration-200"
+            className="group flex flex-col items-center p-3 rounded-xl border border-neutral-gray200 hover:border-neutral-gray300 hover:shadow-md transition-all duration-200 min-w-[120px] flex-shrink-0"
           >
             <div className={`w-12 h-12 ${action.color} rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-200`}>
               {'customIcon' in action ? (
