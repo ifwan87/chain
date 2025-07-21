@@ -370,7 +370,7 @@ export default function Marketplace({ isPreview = false, onConnectWallet }: Mark
                   <div className="text-right">
                     <div className="flex items-center justify-end space-x-2 mb-1">
                       <p className="font-semibold text-neutral-gray900">{offer.quantity} kWh</p>
-                      <span className="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded-full font-bold">
+                      <span className="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded-full font-bold animate-pulse hover:animate-bounce hover:bg-orange-200 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
                         Unutilized Energy
                       </span>
                     </div>
