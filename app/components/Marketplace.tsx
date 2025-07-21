@@ -368,7 +368,12 @@ export default function Marketplace({ isPreview = false, onConnectWallet }: Mark
                 <div className="flex items-center space-x-6">
                   {/* Quantity & Price */}
                   <div className="text-right">
-                    <p className="font-semibold text-neutral-gray900">{offer.quantity} kWh</p>
+                    <div className="flex items-center justify-end space-x-2 mb-1">
+                      <p className="font-semibold text-neutral-gray900">{offer.quantity} kWh</p>
+                      <span className="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded-full font-medium">
+                        Unutilized Energy
+                      </span>
+                    </div>
                     <p className="text-lg font-bold text-primary-main">RM {offer.price.toFixed(3)}/kWh</p>
                     <p className="text-xs text-neutral-gray500">Total: RM {(offer.quantity * offer.price).toFixed(2)}</p>
                   </div>
