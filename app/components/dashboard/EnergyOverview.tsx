@@ -121,7 +121,7 @@ export default function EnergyOverview({ userRole }: EnergyOverviewProps) {
         {/* Current Reading */}
         <div className="text-center p-4 bg-neutral-gray50 rounded-xl">
           <div className="text-2xl font-bold text-neutral-gray900 mb-1">
-            {energyData.current.toFixed(1)}
+            {energyData.current.toFixed(1)} {overview.currentUnit}
           </div>
           <div className="text-sm text-neutral-gray500">{overview.currentLabel}</div>
           <div className="text-xs text-neutral-gray400">{overview.currentUnit}</div>
@@ -130,7 +130,7 @@ export default function EnergyOverview({ userRole }: EnergyOverviewProps) {
         {/* Today's Data */}
         <div className="text-center p-4 bg-neutral-gray50 rounded-xl">
           <div className="text-2xl font-bold text-neutral-gray900 mb-1">
-            {energyData.today}
+            {energyData.today} kWh
           </div>
           <div className="text-sm text-neutral-gray500">{overview.todayLabel}</div>
           <div className="text-xs text-accent-emerald flex items-center justify-center">
@@ -142,7 +142,7 @@ export default function EnergyOverview({ userRole }: EnergyOverviewProps) {
         {/* Monthly Data */}
         <div className="text-center p-4 bg-neutral-gray50 rounded-xl">
           <div className="text-2xl font-bold text-neutral-gray900 mb-1">
-            {energyData.thisMonth.toLocaleString()}
+            {energyData.thisMonth.toLocaleString()} {overview.monthUnit}
           </div>
           <div className="text-sm text-neutral-gray500">{overview.monthLabel}</div>
           <div className="text-xs text-neutral-gray400">{overview.monthUnit}</div>
@@ -163,7 +163,7 @@ export default function EnergyOverview({ userRole }: EnergyOverviewProps) {
             <div className="h-full bg-gradient-to-r from-accent-emerald to-primary-main energy-flow"></div>
           </div>
           <div className="text-sm font-medium text-neutral-gray700">
-            {energyData.current.toFixed(1)} {overview.currentUnit}
+            {energyData.current.toFixed(1)} {overview.currentUnit} {overview.currentUnit}
           </div>
         </div>
       </div>
